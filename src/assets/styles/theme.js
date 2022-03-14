@@ -2,9 +2,11 @@ export const theme = {
     c: {
         red: '#FC4747',
         darkBlue: '#10141E',
+        darkBlueTransparent: '#10141E50',
         greyishBlue: '#5A698F',
         semiDarkBlue: '#161D2F',
         white: '#ffffff',
+        whiteTransparent: '#ffffff75',
     },
     // 1rem == 10px
     fs: {
