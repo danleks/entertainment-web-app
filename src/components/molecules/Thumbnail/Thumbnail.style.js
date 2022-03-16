@@ -11,6 +11,10 @@ export const Wrapper = styled.div`
     background-image: url(${img});
     background-size: cover;
     background-position: 100% 100%;
+
+    &:hover > div {
+        opacity: 1;
+    }
 `;
 
 export const BookmarkLogoWrapper = styled.div`
@@ -63,4 +67,23 @@ export const CategoryWrapper = styled.span`
 export const Title = styled.h3`
     font-size: 15px;
     font-weight: ${({ theme }) => theme.fw.medium};
+`;
+
+export const Play = styled.div`
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 11.7rem;
+    height: 4.8rem;
+    background-color: red;
+    border-radius: 2.8rem;
+    background-color: ${({ theme }) => theme.c.blackSemitransparent};
+    transition: 0.2s opacity ease;
+    cursor: pointer;
 `;

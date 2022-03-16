@@ -1,11 +1,16 @@
 import React from 'react';
 import { ReactComponent as BookmarkLogo } from 'assets/icons/icon-bookmark-empty.svg';
+import { ReactComponent as PlayIcon } from 'assets/icons/icon-play.svg';
 import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.svg';
-import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title } from './Thumbnail.style';
+import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.style';
 
 const Thumbnail = () => {
     return (
         <Wrapper>
+            <Play>
+                <PlayIcon />
+                <span>Play</span>
+            </Play>
             <BookmarkLogoWrapper>
                 <BookmarkLogo />
             </BookmarkLogoWrapper>
