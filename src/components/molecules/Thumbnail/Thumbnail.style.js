@@ -4,13 +4,17 @@ import img from '../../../assets/images/thumbnails/beyond-earth/regular/small.jp
 
 export const Wrapper = styled.div`
     position: relative;
-    width: 24rem;
-    height: 14rem;
+    width: ${({ trending }) => (trending ? '24rem' : '16.4rem')};
+    height: ${({ trending }) => (trending ? '14rem' : '11rem')};
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-image: url(${img});
     background-size: cover;
     background-position: 100% 100%;
+
+    &:hover > div {
+        opacity: 1;
+    }
 `;
 
 export const BookmarkLogoWrapper = styled.div`
@@ -31,8 +35,8 @@ export const DetailsWrapper = styled.div`
     flex-direction: column;
     gap: 4px;
     position: absolute;
-    bottom: 2rem;
-    left: 1.7rem;
+    bottom: ${({ trending }) => (trending ? '2rem' : '-4.5rem')};
+    left: ${({ trending }) => (trending ? '1.7rem' : '0')};
 `;
 
 export const Details = styled.div`
@@ -63,4 +67,23 @@ export const CategoryWrapper = styled.span`
 export const Title = styled.h3`
     font-size: 15px;
     font-weight: ${({ theme }) => theme.fw.medium};
+`;
+
+export const Play = styled.div`
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 11.7rem;
+    height: 4.8rem;
+    background-color: red;
+    border-radius: 2.8rem;
+    background-color: ${({ theme }) => theme.c.blackSemitransparent};
+    transition: 0.2s opacity ease;
+    cursor: pointer;
 `;

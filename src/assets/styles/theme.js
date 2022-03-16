@@ -7,6 +7,7 @@ export const theme = {
         semiDarkBlue: '#161D2F',
         white: '#ffffff',
         whiteTransparent: '#ffffff75',
+        blackSemitransparent: '#00000050',
     },
     // 1rem == 10px
     fs: {
