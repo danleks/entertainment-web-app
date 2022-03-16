@@ -9,7 +9,7 @@ const Trending = () => {
             <SectionTitle>Trending</SectionTitle>
             <MediaWrapper>
                 <li>
-                    <Thumbnail />
+                    <Thumbnail trending />
                 </li>
             </MediaWrapper>
         </section>
