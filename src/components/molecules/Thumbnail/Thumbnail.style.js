@@ -4,8 +4,8 @@ import img from '../../../assets/images/thumbnails/beyond-earth/regular/small.jp
 
 export const Wrapper = styled.div`
     position: relative;
-    width: 24rem;
-    height: 14rem;
+    width: ${({ trending }) => (trending ? '24rem' : '16.4rem')};
+    height: ${({ trending }) => (trending ? '14rem' : '11rem')};
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-image: url(${img});
@@ -35,8 +35,8 @@ export const DetailsWrapper = styled.div`
     flex-direction: column;
     gap: 4px;
     position: absolute;
-    bottom: 2rem;
-    left: 1.7rem;
+    bottom: ${({ trending }) => (trending ? '2rem' : '-4.5rem')};
+    left: ${({ trending }) => (trending ? '1.7rem' : '0')};
 `;
 
 export const Details = styled.div`

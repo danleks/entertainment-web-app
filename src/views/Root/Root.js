@@ -1,5 +1,6 @@
 import { GlobalStyles } from 'assets/styles/GlobalStyles';
 import { theme } from 'assets/styles/theme';
+import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import Trending from 'components/organisms/Trending/Trending';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -11,6 +12,9 @@ const Root = () => {
             <GlobalStyles />
             <Wrapper>
                 <Trending />
+                <section>
+                    <Thumbnail />
+                </section>
             </Wrapper>
         </ThemeProvider>
     );

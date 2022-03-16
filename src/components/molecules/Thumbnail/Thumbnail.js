@@ -4,9 +4,9 @@ import { ReactComponent as PlayIcon } from 'assets/icons/icon-play.svg';
 import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.svg';
 import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.style';
 
-const Thumbnail = () => {
+const Thumbnail = ({ trending }) => {
     return (
-        <Wrapper>
+        <Wrapper trending={trending}>
             <Play>
                 <PlayIcon />
                 <span>Play</span>
