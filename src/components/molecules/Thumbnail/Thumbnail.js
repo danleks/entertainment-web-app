@@ -14,7 +14,7 @@ const Thumbnail = ({ trending }) => {
             <BookmarkLogoWrapper>
                 <BookmarkLogo />
             </BookmarkLogoWrapper>
-            <DetailsWrapper>
+            <DetailsWrapper trending={trending}>
                 <Details>
                     <span>2019</span>
                     <CategoryWrapper>

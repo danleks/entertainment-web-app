@@ -4,7 +4,7 @@ import img from '../../../assets/images/thumbnails/beyond-earth/regular/small.jp
 
 export const Wrapper = styled.div`
     position: relative;
-    width: ${({ trending }) => (trending ? '24rem' : '16.4rem')};
+    width: ${({ trending }) => (trending ? '24rem' : '')};
     height: ${({ trending }) => (trending ? '14rem' : '11rem')};
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;

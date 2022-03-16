@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import React from 'react';
+import { Wrapper } from './MediaWrapper.style';
 
-export const MediaWrapper = styled.ul`
-    display: grid;
-    grid-template-columns: repeat(5, 24rem);
-    list-style: none;
-`;
+const MediaWrapper = ({ trending, children }) => {
+    return <Wrapper trending={trending}>{children}</Wrapper>;
+};
+
+export default MediaWrapper;

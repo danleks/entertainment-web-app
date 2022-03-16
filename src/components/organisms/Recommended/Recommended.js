@@ -1,23 +1,29 @@
 import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
+import React from 'react';
 import MediaWrapper from 'components/molecules/MediaWrapper/MediaWrapper';
 import { SectionWrapper } from 'components/molecules/Section/Section.styles';
-import React from 'react';
 
-const Trending = () => {
+const Recommended = () => {
     return (
-        <SectionWrapper trending>
-            <SectionTitle trending>Trending</SectionTitle>
-            <MediaWrapper trending>
+        <SectionWrapper>
+            <SectionTitle>Recommended for you</SectionTitle>
+            <MediaWrapper>
                 <li>
-                    <Thumbnail trending />
+                    <Thumbnail />
                 </li>
                 <li>
-                    <Thumbnail trending />
+                    <Thumbnail />
+                </li>
+                <li>
+                    <Thumbnail />
+                </li>
+                <li>
+                    <Thumbnail />
                 </li>
             </MediaWrapper>
         </SectionWrapper>
     );
 };
 
-export default Trending;
+export default Recommended;
