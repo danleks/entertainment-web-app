@@ -1,9 +1,8 @@
-import styled from 'styled-components';
+import React from 'react';
+import { SectionTitleStyles } from './SectionTitle.style';
 
-export const SectionTitle = styled.h2`
-    font-size: 2rem;
-    font-weight: ${({ theme }) => theme.fw.light};
-    letter-spacing: -0.31px;
+const SectionTitle = ({ trending, children }) => {
+    return <SectionTitleStyles trending={trending}>{children}</SectionTitleStyles>;
+};
 
-    color: ${({ theme }) => theme.c.white};
-`;
+export default SectionTitle;
