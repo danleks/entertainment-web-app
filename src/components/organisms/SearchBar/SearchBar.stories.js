@@ -13,5 +13,3 @@ export const Empty = Template.bind({});
 Empty.args = {
     placeholder: 'Search for movies or TV series',
 };
-
-export const Filled = Template.bind({});
