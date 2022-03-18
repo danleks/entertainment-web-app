@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from 'assets/styles/GlobalStyles';
+import { GlobalStyles } from 'assets/styles/GlobalStyles';
 import {theme} from 'assets/styles/theme';
-import { addDecorator } from '@storybook/react';
+//import { addDecorator } from '@storybook/react';
 // import { initializeWorker, mswDecorator } from 'msw-storybook-addon';
 
 // initializeWorker();
@@ -15,12 +15,21 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  backgrounds: {
+    default: 'darkBlue',
+    values: [
+      {
+        name: 'darkBlue',
+        value: '#10141E',
+      },
+    ],
+  },
 };
 
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <GlobalStyles />
       <Story />
     </ThemeProvider>
   ),
