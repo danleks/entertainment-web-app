@@ -4,7 +4,7 @@ import img from '../../../assets/images/thumbnails/beyond-earth/regular/small.jp
 
 export const Wrapper = styled.div`
     position: relative;
-    width: ${({ trending }) => (trending ? '24rem' : '')};
+    width: ${({ trending }) => (trending ? '24rem' : '16.4rem')};
     height: ${({ trending }) => (trending ? '14rem' : '11rem')};
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -65,6 +65,7 @@ export const CategoryWrapper = styled.span`
 `;
 
 export const Title = styled.h3`
+    color: ${({ theme }) => theme.c.white};
     font-size: 15px;
     font-weight: ${({ theme }) => theme.fw.medium};
 `;
