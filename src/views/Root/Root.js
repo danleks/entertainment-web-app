@@ -1,8 +1,7 @@
 import { GlobalStyles } from 'assets/styles/GlobalStyles';
 import { theme } from 'assets/styles/theme';
-import Recommended from 'components/organisms/Recommended/Recommended';
 import SearchBar from 'components/organisms/SearchBar/SearchBar';
-import Trending from 'components/organisms/Trending/Trending';
+import Section from 'components/organisms/Section/Section';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Wrapper } from './Roots.style';
@@ -13,8 +12,8 @@ const Root = () => {
             <GlobalStyles />
             <Wrapper>
                 <SearchBar placeholder="Search for movies or TV series" />
-                <Trending />
-                <Recommended />
+                <Section trending title="Trending" />
+                <Section title="Recommended for you" />
             </Wrapper>
         </ThemeProvider>
     );
