@@ -6,7 +6,7 @@ import { MediaWrapper, SectionWrapper, MediaWrapperItem } from './Section.styles
 const Section = ({ trending, title }) => {
     return (
         <SectionWrapper trending={trending}>
-            <SectionTitle>{title}</SectionTitle>
+            <SectionTitle trending={trending}>{title}</SectionTitle>
             <MediaWrapper trending={trending}>
                 <MediaWrapperItem>
                     <Thumbnail trending={trending} />
