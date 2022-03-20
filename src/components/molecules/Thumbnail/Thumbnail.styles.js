@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 
-import img from '../../../assets/images/thumbnails/beyond-earth/regular/small.jpg';
-
 export const Wrapper = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    background-image: url(${img});
+    background-image: url(${({ thumbnail }) => (thumbnail.trending ? thumbnail.trending.small : thumbnail.regular.small)});
     background-size: cover;
-    background-position: 100% 100%;
+    background-position: top;
+
+    @media (min-width: 768px) {
+        background-image: url(${({ thumbnail }) => (thumbnail.trending ? thumbnail.trending.large : thumbnail.regular.medium)});
+    }
+
+    @media (min-width: 1440px) {
+        background-image: url(${({ thumbnail }) => (thumbnail.trending ? thumbnail.trending.large : thumbnail.regular.large)});
+    }
 
     &:hover > div {
         opacity: 1;
@@ -28,6 +34,10 @@ export const BookmarkLogoWrapper = styled.div`
     height: 3.2rem;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.c.darkBlueTransparent};
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const DetailsWrapper = styled.div`

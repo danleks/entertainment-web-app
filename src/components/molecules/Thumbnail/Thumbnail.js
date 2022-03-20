@@ -4,9 +4,9 @@ import { ReactComponent as PlayIcon } from 'assets/icons/icon-play.svg';
 import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.svg';
 import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.styles';
 
-const Thumbnail = ({ trending }) => {
+const Thumbnail = ({ trending, item: { title, thumbnail, year, category, rating, isBookmarked, isTrending } }) => {
     return (
-        <Wrapper trending={trending}>
+        <Wrapper thumbnail={thumbnail} trending={trending}>
             <Play>
                 <PlayIcon />
                 <span>Play</span>
@@ -16,14 +16,14 @@ const Thumbnail = ({ trending }) => {
             </BookmarkLogoWrapper>
             <DetailsWrapper trending={trending}>
                 <Details trending={trending}>
-                    <span>2019</span>
+                    <span>{year}</span>
                     <CategoryWrapper trending={trending}>
                         <MovieIcon />
-                        Movie
+                        {category}
                     </CategoryWrapper>
-                    <span>PG</span>
+                    <span>{rating}</span>
                 </Details>
-                <Title trending={trending}>Beyond Earth</Title>
+                <Title trending={trending}>{title}</Title>
             </DetailsWrapper>
         </Wrapper>
     );

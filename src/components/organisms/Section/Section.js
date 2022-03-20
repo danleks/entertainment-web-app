@@ -1,29 +1,37 @@
 import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
-import React from 'react';
-import { MediaWrapper, SectionWrapper, MediaWrapperItem } from './Section.styles';
+import React, { useState, useEffect } from 'react';
+import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { data } from 'data/data';
 
 const Section = ({ trending, title }) => {
+    const [media, setMedia] = useState([]);
+    useEffect(() => {
+        setMedia(data);
+    }, []);
+
     return (
-        <SectionWrapper trending={trending}>
+        <SectionStyles trending={trending}>
             <SectionTitle trending={trending}>{title}</SectionTitle>
             <MediaWrapper trending={trending}>
-                {data.map((item) => {
-                    if (item.isTrending) {
+                {media.map((item) => {
+                    if (trending && item.isTrending) {
                         return (
-                            <MediaWrapperItem key={item.title}>
-                                <Thumbnail trending={trending} />
-                            </MediaWrapperItem>
+                            <MediaItem key={item.title}>
+                                <Thumbnail item={item} trending={item.isTrending} />
+                            </MediaItem>
                         );
-                    } else {
-                        <MediaWrapperItem>
-                            <Thumbnail />
-                        </MediaWrapperItem>;
+                    }
+                    if (!trending && !item.isTrending) {
+                        return (
+                            <MediaItem key={item.title}>
+                                <Thumbnail item={item} trending={item.isTrending} />
+                            </MediaItem>
+                        );
                     }
                 })}
             </MediaWrapper>
-        </SectionWrapper>
+        </SectionStyles>
     );
 };
 

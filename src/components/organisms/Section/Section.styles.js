@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
-export const SectionWrapper = styled.section`
+export const SectionStyles = styled.section`
+    padding-top: ${({ trending }) => (trending ? '2.4rem' : '2.4rem')};
     padding-right: ${({ trending }) => (trending ? '' : '1.6rem')};
+    @media (min-width: 768px) {
+        padding-top: ${({ trending }) => (trending ? '3.3rem' : '3.9rem')};
+    }
+    @media (min-width: 1440px) {
+        padding-top: ${({ trending }) => (trending ? '3.4rem' : '4rem')};
+    }
 `;
 
 export const MediaWrapper = styled.ul`
@@ -31,11 +38,19 @@ export const MediaWrapper = styled.ul`
         --heightBasic: 14rem;
         --heightTrending: 23rem;
         --colGapBasic: 3rem;
-        --rowGapBasic: 6.7rem;
+        --rowGapBasic: 7.6rem;
         --colGapTrending: 4rem;
+    }
+
+    @media (min-width: 1440px) {
+        --colBasic: 4;
+        --widthBasic: 28rem;
+        --heightBasic: 17.4rem;
+        --colGapBasic: 4rem;
+        --rowGapBasic: 8.4rem;
     }
 `;
 
-export const MediaWrapperItem = styled.li`
+export const MediaItem = styled.li`
     list-style: none;
 `;
