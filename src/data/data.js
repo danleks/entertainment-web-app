@@ -1,4 +1,4 @@
-const data = [
+export const data = [
     {
         title: 'Beyond Earth',
         thumbnail: {
