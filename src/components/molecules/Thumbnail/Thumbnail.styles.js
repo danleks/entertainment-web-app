@@ -4,8 +4,8 @@ import img from '../../../assets/images/thumbnails/beyond-earth/regular/small.jp
 
 export const Wrapper = styled.div`
     position: relative;
-    width: ${({ trending }) => (trending ? '24rem' : '16.4rem')};
-    height: ${({ trending }) => (trending ? '14rem' : '11rem')};
+    width: 100%;
+    height: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-image: url(${img});
@@ -37,6 +37,10 @@ export const DetailsWrapper = styled.div`
     position: absolute;
     bottom: ${({ trending }) => (trending ? '2rem' : '-4.5rem')};
     left: ${({ trending }) => (trending ? '1.7rem' : '0')};
+    @media (min-width: 768px) {
+        bottom: ${({ trending }) => (trending ? '2.4rem' : '-4.8rem')};
+        left: ${({ trending }) => (trending ? '2.4rem' : '0')};
+    }
 `;
 
 export const Details = styled.div`
@@ -46,6 +50,9 @@ export const Details = styled.div`
         font-size: 1.2rem;
         font-weight: ${({ theme }) => theme.fw.light};
         color: ${({ theme }) => theme.c.whiteTransparent};
+        @media (min-width: 768px) {
+            font-size: ${({ trending }) => (trending ? '15px' : '13px')};
+        }
     }
 `;
 
@@ -68,6 +75,9 @@ export const Title = styled.h3`
     color: ${({ theme }) => theme.c.white};
     font-size: 15px;
     font-weight: ${({ theme }) => theme.fw.medium};
+    @media (min-width: 768px) {
+        font-size: ${({ trending }) => (trending ? '24px' : '18px')};
+    }
 `;
 
 export const Play = styled.div`
