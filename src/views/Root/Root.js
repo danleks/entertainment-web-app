@@ -5,17 +5,22 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import Home from 'views/Home/Home';
 import { Wrapper } from './Roots.style';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const Root = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <MainTemplate>
-                <Wrapper>
-                    <Home />
-                </Wrapper>
-            </MainTemplate>
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                <MainTemplate>
+                    <Wrapper>
+                        <Routes>
+                            <Route exact path="/" element={<Home />} />
+                        </Routes>
+                    </Wrapper>
+                </MainTemplate>
+            </ThemeProvider>
+        </BrowserRouter>
     );
 };
 
