@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SectionStyles = styled.section`
     padding-top: ${({ trending }) => (trending ? '2.4rem' : '2.4rem')};
-    padding-right: ${({ trending }) => (trending ? '' : '1.6rem')};
+    ${'' /* padding-right: ${({ trending }) => (trending ? '' : '1.6rem')}; */}
     @media (min-width: 768px) {
         padding-top: ${({ trending }) => (trending ? '3.3rem' : '3.9rem')};
     }
