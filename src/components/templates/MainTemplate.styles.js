@@ -1,17 +1,33 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    --paddingLeft: 1.6rem;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
     color: ${({ theme }) => theme.c.white};
     background-color: ${({ theme }) => theme.c.darkBlue};
     overflow-x: scroll;
 
-    & > *:not(:first-child) {
-        padding-left: var(--paddingLeft);
+    @media (min-width: 768px) {
+        gap: 3.3rem;
+        padding: 2.3rem 2.5rem 5.6rem 2.5rem;
+    }
 
+    & > nav {
+        padding-left: 0;
+    }
+
+    & > div:nth-child(2) {
+        padding-left: 1.6rem;
         @media (min-width: 768px) {
-            --paddingLeft: 2.5rem;
+            padding-left: 0;
+        }
+    }
+
+    & > div:nth-child(3) {
+        padding-left: 1.6rem;
+        @media (min-width: 768px) {
+            padding-left: 0;
         }
     }
 `;

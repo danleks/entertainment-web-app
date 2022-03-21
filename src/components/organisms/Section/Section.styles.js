@@ -1,15 +1,6 @@
 import styled from 'styled-components';
 
-export const SectionStyles = styled.section`
-    padding-top: ${({ trending }) => (trending ? '2.4rem' : '2.4rem')};
-    ${'' /* padding-right: ${({ trending }) => (trending ? '' : '1.6rem')}; */}
-    @media (min-width: 768px) {
-        padding-top: ${({ trending }) => (trending ? '3.3rem' : '3.9rem')};
-    }
-    @media (min-width: 1440px) {
-        padding-top: ${({ trending }) => (trending ? '3.4rem' : '4rem')};
-    }
-`;
+export const SectionStyles = styled.section``;
 
 export const MediaWrapper = styled.ul`
     --colBasic: 2;
