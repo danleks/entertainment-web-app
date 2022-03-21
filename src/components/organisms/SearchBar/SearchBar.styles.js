@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 1.6rem;
-    width: 25.7rem;
+    width: 27.7rem;
 
     @media (min-width: 768px) {
         width: 38.1rem;

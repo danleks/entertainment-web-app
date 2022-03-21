@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom';
 
 export const NavigationStyles = styled.nav`
     background-color: ${({ theme }) => theme.c.semiDarkBlue};
+    @media (min-width: 768px) {
+        border-radius: 1rem;
+    }
 `;
 
 export const NavigatonListStyles = styled.ul`
