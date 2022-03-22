@@ -64,7 +64,7 @@ export const LinksWrapperStyles = styled.ul`
     }
 
     & > li:hover path {
-        fill: ${({ theme }) => theme.c.white};
+        fill: ${({ theme }) => theme.c.red};
     }
 `;
 

@@ -24,6 +24,7 @@ export const InputStyles = styled.input`
     font-weight: ${({ theme }) => theme.fw.light};
     color: ${({ theme }) => theme.c.white};
     background-color: transparent;
+    caret-color: ${({ theme }) => theme.c.red};
 
     @media (min-width: 768px) {
         font-size: 24px;
