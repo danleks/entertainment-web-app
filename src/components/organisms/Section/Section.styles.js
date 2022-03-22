@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const SectionStyles = styled.section``;
+export const SectionStyles = styled.section`
+    overflow-x: ${({ trending }) => (trending ? 'scroll' : 'unset')};
+`;
 
 export const MediaWrapper = styled.ul`
     --colBasic: 2;
@@ -11,7 +13,7 @@ export const MediaWrapper = styled.ul`
     --heightTrending: 14rem;
     --colGapBasic: 1.5rem;
     --colGapTrending: 1.6rem;
-    --rowGapBasic: 5.4rem;
+    --rowGapBasic: 6rem;
     --rowGapTrending: 0;
 
     display: grid;
