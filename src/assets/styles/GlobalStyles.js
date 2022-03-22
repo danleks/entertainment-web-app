@@ -52,5 +52,6 @@ export const GlobalStyles = createGlobalStyle`
     body {
         font-size: 1.6rem;
         font-family: 'Outfit', sans-serif;
+        background-color: ${({ theme }) => theme.c.darkBlue};
     }
 `;
