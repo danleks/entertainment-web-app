@@ -2,13 +2,17 @@ import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
 import React, { useState, useEffect } from 'react';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
-import { data } from 'data/data';
+import { useMedia } from 'hooks/useMedia';
 
 const Section = ({ trending, title }) => {
     const [media, setMedia] = useState([]);
+    const { getMedia } = useMedia();
     useEffect(() => {
-        setMedia(data);
-    }, []);
+        (async () => {
+            const media = await getMedia();
+            setMedia(media);
+        })();
+    }, [getMedia]);
 
     return (
         <SectionStyles trending={trending}>
