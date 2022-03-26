@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { ReactComponent as BookmarkSvg } from 'assets/icons/icon-nav-bookmark.svg';
 import { ReactComponent as HomeSvg } from 'assets/icons/icon-nav-home.svg';
 import { ReactComponent as MoviesSvg } from 'assets/icons/icon-nav-movies.svg';
@@ -13,29 +12,29 @@ const Navigation = () => {
         <NavigationStyles>
             <NavigatonListStyles>
                 <li>
-                    <NavLinkStyles to="/">
+                    <NavLinkStyles to="/" title="home">
                         <LogoSvg />
                     </NavLinkStyles>
                 </li>
                 <li>
                     <LinksWrapperStyles>
                         <li>
-                            <NavLinkStyles to="/">
+                            <NavLinkStyles to="/" title="home">
                                 <HomeSvg />
                             </NavLinkStyles>
                         </li>
                         <li>
-                            <NavLinkStyles to="/movies">
+                            <NavLinkStyles to="/movies" title="movies" data-testid="movies">
                                 <MoviesSvg />
                             </NavLinkStyles>
                         </li>
                         <li>
-                            <NavLinkStyles to="/tv-series">
+                            <NavLinkStyles to="/tv-series" title="tv-series">
                                 <SeriesSvg />
                             </NavLinkStyles>
                         </li>
                         <li>
-                            <NavLinkStyles to="/bookmarks">
+                            <NavLinkStyles to="/bookmarks" title="bookmarks">
                                 <BookmarkSvg />
                             </NavLinkStyles>
                         </li>

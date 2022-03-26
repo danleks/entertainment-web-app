@@ -9,30 +9,21 @@ const Section = ({ trending, title }) => {
     const { getMedia } = useMedia();
     useEffect(() => {
         (async () => {
-            const media = await getMedia();
+            const media = (await getMedia(trending)) || [];
             setMedia(media);
         })();
-    }, [getMedia]);
+    }, [getMedia, trending]);
 
     return (
         <SectionStyles trending={trending}>
             <SectionTitle trending={trending}>{title}</SectionTitle>
             <MediaWrapper trending={trending}>
                 {media.map((item) => {
-                    if (trending && item.isTrending) {
-                        return (
-                            <MediaItem key={item.title}>
-                                <Thumbnail item={item} trending={item.isTrending} />
-                            </MediaItem>
-                        );
-                    }
-                    if (!trending && !item.isTrending) {
-                        return (
-                            <MediaItem key={item.title}>
-                                <Thumbnail item={item} trending={item.isTrending} />
-                            </MediaItem>
-                        );
-                    }
+                    return (
+                        <MediaItem key={item.title}>
+                            <Thumbnail item={item} trending={item.isTrending} />
+                        </MediaItem>
+                    );
                 })}
             </MediaWrapper>
         </SectionStyles>

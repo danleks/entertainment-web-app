@@ -4,9 +4,10 @@ import { ReactComponent as PlayIcon } from 'assets/icons/icon-play.svg';
 import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.svg';
 import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.styles';
 
-const Thumbnail = ({ trending, item: { title, thumbnail, year, category, rating, isBookmarked, isTrending } }) => {
+const Thumbnail = ({ item: { title, thumbnail, year, category, rating, isBookmarked, isTrending } }) => {
+    console.log(title);
     return (
-        <Wrapper thumbnail={thumbnail} trending={trending}>
+        <Wrapper thumbnail={thumbnail} trending={isTrending}>
             <Play>
                 <PlayIcon />
                 <span>Play</span>
@@ -14,16 +15,16 @@ const Thumbnail = ({ trending, item: { title, thumbnail, year, category, rating,
             <BookmarkLogoWrapper>
                 <BookmarkLogo />
             </BookmarkLogoWrapper>
-            <DetailsWrapper trending={trending}>
-                <Details trending={trending}>
+            <DetailsWrapper trending={isTrending}>
+                <Details trending={isTrending}>
                     <span>{year}</span>
-                    <CategoryWrapper trending={trending}>
+                    <CategoryWrapper trending={isTrending}>
                         <MovieIcon />
                         {category}
                     </CategoryWrapper>
                     <span>{rating}</span>
                 </Details>
-                <Title trending={trending}>{title}</Title>
+                <Title trending={isTrending}>{title}</Title>
             </DetailsWrapper>
         </Wrapper>
     );
