@@ -1,17 +1,18 @@
-import Home from './Home';
 import { setupServer } from 'msw/node';
-import { render, screen } from 'test-utils';
+import { render, screen, fireEvent } from 'test-utils';
 import { handlers } from 'mocks/handlers';
+import Root from './Root';
 
 const server = setupServer(...handlers);
 
-describe('Home tests', () => {
+describe('Root tests', () => {
     beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());
     afterAll(() => server.close());
-    it('renders the home component', async () => {
-        render(<Home />);
-        await screen.findByText('Beyond Earth');
+    it('renders the root component', async () => {
+        render(<Root />);
         await screen.findByText('The Great Lands');
+        fireEvent.click(await screen.findByTestId('movies'));
+        screen.getByText('home');
     });
 });

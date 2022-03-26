@@ -15,6 +15,9 @@ const Root = () => {
                 <Wrapper>
                     <Routes>
                         <Route exact path="/" element={<Home />} />
+                        <Route path="/movies" element={<div>home</div>} />
+                        <Route path="/tv-series" element={<div>tv series</div>} />
+                        <Route path="/bookmarks" element={<div>bookmarks</div>} />
                     </Routes>
                 </Wrapper>
             </MainTemplate>
