@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const NavigationStyles = styled.nav`
+    height: 100%;
     max-height: 96rem;
     background-color: ${({ theme }) => theme.c.semiDarkBlue};
     @media (min-width: 768px) {
