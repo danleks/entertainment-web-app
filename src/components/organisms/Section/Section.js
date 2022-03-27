@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
-import React, { useState, useEffect } from 'react';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useMedia } from 'hooks/useMedia';
 
@@ -28,6 +29,11 @@ const Section = ({ trending, title }) => {
             </MediaWrapper>
         </SectionStyles>
     );
+};
+
+Section.propTypes = {
+    trending: PropTypes.bool,
+    title: PropTypes.string.isRequired,
 };
 
 export default Section;
