@@ -2,7 +2,16 @@
 	"extends": ["react-app", "react-app/jest", "plugin:prettier/recommended", "prettier"],
 	"plugins": ["prettier"],
 	"rules": {
-		"prettier/prettier": ["warn", {"singleQuote": true}]
+		"prettier/prettier": ["warn", {"singleQuote": true}],
+		"import/no-anonymous-default-export": ["off", {
+			"allowArray": false,
+			"allowArrowFunction": false,
+			"allowAnonymousClass": false,
+			"allowAnonymousFunction": false,
+			"allowCallExpression": true, // The true value here is for backward compatibility
+			"allowLiteral": false,
+			"allowObject": false
+		  }]
 	},
 	"env": {
 		"browser": true,

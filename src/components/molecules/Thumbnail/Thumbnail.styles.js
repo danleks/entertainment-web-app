@@ -104,6 +104,7 @@ export const Play = styled.div`
     height: 4.8rem;
     background-color: red;
     border-radius: 2.8rem;
+    color: ${({ theme }) => theme.c.white};
     background-color: ${({ theme }) => theme.c.blackSemitransparent};
     transition: 0.2s opacity ease;
     cursor: pointer;
