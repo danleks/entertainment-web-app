@@ -1,6 +1,7 @@
 import Navigation from 'components/organisms/Navigation/Navigation';
 import SearchBar from 'components/organisms/SearchBar/SearchBar';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Wrapper } from './MainTemplate.styles';
 
 const MainTemplate = ({ children }) => {
@@ -11,6 +12,10 @@ const MainTemplate = ({ children }) => {
             {children}
         </Wrapper>
     );
+};
+
+MainTemplate.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default MainTemplate;
