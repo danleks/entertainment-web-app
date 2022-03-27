@@ -7,7 +7,7 @@ const SearchBar = ({ placeholder }) => {
     return (
         <Wrapper>
             <SearchIconStyles />
-            <InputStyles placeholder={placeholder} value={value} onChange={(e) => setValue(e.target.value)} />
+            <InputStyles placeholder={placeholder} value={value} onChange={(event) => setValue(event.target.value)} />
         </Wrapper>
     );
 };
