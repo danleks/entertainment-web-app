@@ -12,7 +12,14 @@ export const useMedia = () => {
             console.log(e);
         }
     }, []);
+    const findMedia = useCallback(async (searchValue) => {
+        const { data } = await axios.post('/search', {
+            searchValue,
+        });
+        return data.media;
+    }, []);
     return {
         getMedia,
+        findMedia,
     };
 };
