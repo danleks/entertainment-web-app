@@ -1,40 +1,48 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper, InputStyles, SearchIconStyles } from './SearchBar.styles';
+import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
 import { useMedia } from 'hooks/useMedia';
+import { useCombobox } from 'downshift';
 
 const SearchBar = ({ placeholder }) => {
-    const [value, setValue] = useState('');
     const [search, setSearch] = useState([]);
-    const isInitialMount = useRef(true);
-
     const { findMedia } = useMedia();
 
     const handleMediaSearch = useCallback(
         async (string) => {
             const res = await findMedia(string);
             setSearch(res);
+            console.log(res);
         },
         [findMedia],
     );
 
-    useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } else {
-            handleMediaSearch(value);
-        }
-    }, [handleMediaSearch, value]);
+    const { isOpen, getToggleButtonProps, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
+        items: search,
+        onInputValueChange: handleMediaSearch,
+    });
 
     return (
-        <Wrapper>
+        <Wrapper {...getComboboxProps()}>
             <SearchIconStyles />
-            <InputStyles placeholder={placeholder} value={value} onChange={(e) => setValue(e.target.value)} />
-            <ul>
-                {search.map((item) => {
-                    return <li key={item.title}>{item.title}</li>;
-                })}
-            </ul>
+            <InputStyles {...getInputProps()} placeholder={placeholder} />
+            <ResultsWrapper>
+                <h2>Search movie or tv-series</h2>
+                <ResultsList {...getMenuProps()}>
+                    {isOpen &&
+                        search.map((item, index) => {
+                            return (
+                                <ResultsItem
+                                    isHighlighted={highlightedIndex === index}
+                                    {...getItemProps({ item, index })}
+                                    key={`${item.title}${index}`}
+                                >
+                                    {item.title}
+                                </ResultsItem>
+                            );
+                        })}
+                </ResultsList>
+            </ResultsWrapper>
         </Wrapper>
     );
 };
