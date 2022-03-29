@@ -27,24 +27,26 @@ const SearchBar = ({ placeholder }) => {
         <Wrapper {...getComboboxProps()}>
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={placeholder} />
-            {isOpen && search.length > 0 && (
-                <ResultsWrapper>
-                    <h2>Search movie or tv-series</h2>
-                    <ResultsList {...getMenuProps()}>
-                        {search.map((item, index) => {
-                            return (
-                                <ResultsItem
-                                    isHighlighted={highlightedIndex === index}
-                                    {...getItemProps({ item, index })}
-                                    key={`${item.title}${index}`}
-                                >
-                                    {item.title}
-                                </ResultsItem>
-                            );
-                        })}
-                    </ResultsList>
-                </ResultsWrapper>
-            )}
+            <ResultsWrapper {...getMenuProps()}>
+                {search.length > 0 && isOpen && (
+                    <>
+                        <h2>Search movie or tv-series</h2>
+                        <ResultsList>
+                            {search.map((item, index) => {
+                                return (
+                                    <ResultsItem
+                                        isHighlighted={highlightedIndex === index}
+                                        {...getItemProps({ item, index })}
+                                        key={`${item.title}${index}`}
+                                    >
+                                        {item.title}
+                                    </ResultsItem>
+                                );
+                            })}
+                        </ResultsList>
+                    </>
+                )}
+            </ResultsWrapper>
         </Wrapper>
     );
 };
