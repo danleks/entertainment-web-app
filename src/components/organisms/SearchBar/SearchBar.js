@@ -19,6 +19,7 @@ const SearchBar = ({ placeholder }) => {
 
     const { isOpen, getToggleButtonProps, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
         items: search,
+        itemToString: (item) => (item ? item.title : ''),
         onInputValueChange: handleMediaSearch,
     });
 
