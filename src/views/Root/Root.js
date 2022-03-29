@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import Home from 'views/Home/Home';
 import { Wrapper } from './Roots.style';
 import { Routes, Route } from 'react-router-dom';
+import Movies from 'views/Movies/Movies';
 
 const Root = () => {
     return (
@@ -15,7 +16,7 @@ const Root = () => {
                 <Wrapper>
                     <Routes>
                         <Route exact path="/" element={<Home />} />
-                        <Route path="/movies" element={<div>home</div>} />
+                        <Route path="/movies" element={<Movies />} />
                         <Route path="/tv-series" element={<div>tv series</div>} />
                         <Route path="/bookmarks" element={<div>bookmarks</div>} />
                     </Routes>
