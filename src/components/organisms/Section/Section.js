@@ -5,20 +5,20 @@ import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useMedia } from 'hooks/useMedia';
 
-const Section = ({ trending, title }) => {
+const Section = ({ details: { title, isTrending, category, isBookmarked } }) => {
     const [media, setMedia] = useState([]);
     const { getMedia } = useMedia();
     useEffect(() => {
         (async () => {
-            const media = (await getMedia(trending)) || [];
+            const media = (await getMedia(isTrending)) || [];
             setMedia(media);
         })();
-    }, [getMedia, trending]);
+    }, [getMedia, isTrending]);
 
     return (
-        <SectionStyles trending={trending}>
-            <SectionTitle trending={trending}>{title}</SectionTitle>
-            <MediaWrapper trending={trending}>
+        <SectionStyles trending={isTrending}>
+            <SectionTitle trending={isTrending}>{title}</SectionTitle>
+            <MediaWrapper trending={isTrending}>
                 {media.map((item) => {
                     return (
                         <MediaItem key={item.title}>

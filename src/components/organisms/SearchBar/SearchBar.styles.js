@@ -53,6 +53,7 @@ export const SearchIconStyles = styled.span`
 `;
 
 export const ResultsWrapper = styled.div`
+    display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
     position: absolute;
     bottom: 0;
     width: 100%;
