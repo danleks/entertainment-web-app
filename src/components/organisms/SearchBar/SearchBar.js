@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
 import { useMedia } from 'hooks/useMedia';
@@ -17,7 +17,7 @@ const SearchBar = ({ placeholder }) => {
         [findMedia],
     );
 
-    const { isOpen, getToggleButtonProps, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
+    const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
         items: search,
         itemToString: (item) => (item ? item.title : ''),
         onInputValueChange: handleMediaSearch,
@@ -27,11 +27,11 @@ const SearchBar = ({ placeholder }) => {
         <Wrapper {...getComboboxProps()}>
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={placeholder} />
-            <ResultsWrapper>
-                <h2>Search movie or tv-series</h2>
-                <ResultsList {...getMenuProps()}>
-                    {isOpen &&
-                        search.map((item, index) => {
+            {isOpen && search.length > 0 && (
+                <ResultsWrapper>
+                    <h2>Search movie or tv-series</h2>
+                    <ResultsList {...getMenuProps()}>
+                        {search.map((item, index) => {
                             return (
                                 <ResultsItem
                                     isHighlighted={highlightedIndex === index}
@@ -42,8 +42,9 @@ const SearchBar = ({ placeholder }) => {
                                 </ResultsItem>
                             );
                         })}
-                </ResultsList>
-            </ResultsWrapper>
+                    </ResultsList>
+                </ResultsWrapper>
+            )}
         </Wrapper>
     );
 };
