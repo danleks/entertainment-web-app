@@ -78,5 +78,6 @@ export const ResultsList = styled.ul`
 
 export const ResultsItem = styled.li`
     padding: 1rem 0;
+    color: ${({ theme }) => theme.c.white};
     background-color: ${({ theme, isHighlighted }) => (isHighlighted ? theme.c.greyishBlue : '')};
 `;

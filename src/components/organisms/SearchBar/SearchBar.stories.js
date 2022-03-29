@@ -1,10 +1,12 @@
 import React from 'react';
+import { MSWProvider } from 'providers/MSWProvider';
 
 import SearchBar from './SearchBar';
 
 export default {
     title: 'Components/Organisms/SearchBar',
     component: SearchBar,
+    decorators: [(story) => <MSWProvider>{story()}</MSWProvider>],
 };
 
 const Template = (args) => <SearchBar {...args} />;
