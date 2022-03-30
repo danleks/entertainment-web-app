@@ -17,13 +17,13 @@ const Wrapper = styled.div`
     }
 `;
 
-const Movies = () => {
+const TVSeries = () => {
     const details = {
-        title: 'movies',
+        title: 'tv-series',
         category: {
             trending: false,
-            movie: true,
-            tvseries: false,
+            movie: false,
+            tvseries: true,
             bookmark: false,
         },
     };
@@ -34,4 +34,4 @@ const Movies = () => {
     );
 };
 
-export default Movies;
+export default TVSeries;

@@ -4,20 +4,27 @@ import { Wrapper } from './Home.styles';
 
 const Home = () => {
     const detailsForTrending = {
-        title: 'trending',
-        isTrending: true,
-        category: '',
-        isBookmarked: false,
+        title: 'recommended for you',
+        category: {
+            trending: true,
+            movie: false,
+            tvseries: false,
+            bookmark: false,
+        },
     };
+
     const detailsForRecommended = {
         title: 'recommended for you',
-        isTrending: false,
-        category: '',
-        isBookmarked: false,
+        category: {
+            trending: false,
+            movie: true,
+            tvseries: true,
+            bookmark: false,
+        },
     };
     return (
         <Wrapper>
-            <Section details={detailsForTrending} />
+            <Section details={detailsForTrending} trending />
             <Section details={detailsForRecommended} />
         </Wrapper>
     );
