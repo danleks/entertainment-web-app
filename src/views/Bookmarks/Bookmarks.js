@@ -17,14 +17,14 @@ const Wrapper = styled.div`
     }
 `;
 
-const Movies = () => {
+const Bookmarks = () => {
     const details = {
-        title: 'movies',
+        title: 'bookmarks',
         category: {
             trending: false,
-            movie: true,
+            movie: false,
             tvseries: false,
-            bookmark: false,
+            bookmark: true,
         },
     };
     return (
@@ -34,4 +34,4 @@ const Movies = () => {
     );
 };
 
-export default Movies;
+export default Bookmarks;

@@ -7,6 +7,8 @@ import Home from 'views/Home/Home';
 import { Wrapper } from './Roots.style';
 import { Routes, Route } from 'react-router-dom';
 import Movies from 'views/Movies/Movies';
+import TVSeries from 'views/TV-Series/TV-Series';
+import Bookmarks from 'views/Bookmarks/Bookmarks';
 
 const Root = () => {
     return (
@@ -17,8 +19,8 @@ const Root = () => {
                     <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route path="/movies" element={<Movies />} />
-                        <Route path="/tv-series" element={<div>tv series</div>} />
-                        <Route path="/bookmarks" element={<div>bookmarks</div>} />
+                        <Route path="/tv-series" element={<TVSeries />} />
+                        <Route path="/bookmarks" element={<Bookmarks />} />
                     </Routes>
                 </Wrapper>
             </MainTemplate>
