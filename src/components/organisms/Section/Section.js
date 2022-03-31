@@ -6,7 +6,6 @@ import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useMedia } from 'hooks/useMedia';
 
 const Section = ({ title, category: { trending, movie, tvseries, bookmark } }) => {
-    console.log(title);
     const [media, setMedia] = useState([]);
     const { getMedia } = useMedia();
     useEffect(() => {
