@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
 import { useMedia } from 'hooks/useMedia';
 import { useCombobox } from 'downshift';
+import { useLocation } from 'react-router-dom';
 
 const SearchBar = ({ placeholder }) => {
+    const { pathname } = useLocation();
     const [search, setSearch] = useState([]);
     const { findMedia } = useMedia();
 
     const handleMediaSearch = useCallback(
-        async (string) => {
-            const res = await findMedia(string);
+        async (valueObj) => {
+            const res = await findMedia(valueObj, pathname);
             setSearch(res);
-            console.log(res);
         },
-        [findMedia],
+        [findMedia, pathname],
     );
 
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
@@ -28,7 +29,7 @@ const SearchBar = ({ placeholder }) => {
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={placeholder} />
             <ResultsWrapper isVisible={isOpen && search.length}>
-                <h2>Search movie or tv-series</h2>
+                <h2>Search {pathname === '/' ? 'movies or tv-series' : pathname.split('/')}</h2>
                 <ResultsList {...getMenuProps()}>
                     {isOpen &&
                         search.map((item, index) => {

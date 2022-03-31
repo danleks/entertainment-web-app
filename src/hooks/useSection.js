@@ -5,6 +5,7 @@ export const useSection = () => {
 
     const getSectionProps = (trending) => {
         //TODO: rewrite to switch
+        const title = pathname.split('/');
         if (pathname === '/' && trending) {
             return {
                 title: 'trending',
@@ -31,7 +32,7 @@ export const useSection = () => {
 
         if (pathname === '/movies') {
             return {
-                title: pathname,
+                title,
                 category: {
                     trending: false,
                     movie: true,
@@ -43,7 +44,7 @@ export const useSection = () => {
 
         if (pathname === '/tv-series') {
             return {
-                title: pathname,
+                title,
                 category: {
                     trending: false,
                     movie: false,
@@ -55,7 +56,7 @@ export const useSection = () => {
 
         if (pathname === '/bookmarks') {
             return {
-                title: pathname,
+                title,
                 category: {
                     trending: false,
                     movie: false,
