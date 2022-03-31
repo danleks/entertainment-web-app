@@ -5,15 +5,16 @@ import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useMedia } from 'hooks/useMedia';
 
-const Section = ({ details: { title, category }, trending }) => {
+const Section = ({ title, category: { trending, movie, tvseries, bookmark } }) => {
+    console.log(title);
     const [media, setMedia] = useState([]);
     const { getMedia } = useMedia();
     useEffect(() => {
         (async () => {
-            const media = (await getMedia(category)) || [];
+            const media = (await getMedia({ trending, movie, tvseries, bookmark })) || [];
             setMedia(media);
         })();
-    }, [getMedia, category]);
+    }, [getMedia, trending, movie, tvseries, bookmark]);
 
     return (
         <SectionStyles trending={trending}>

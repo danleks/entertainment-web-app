@@ -1,6 +1,7 @@
 import Section from 'components/organisms/Section/Section';
 import React from 'react';
 import styled from 'styled-components';
+import { useSection } from 'hooks/useSection';
 
 const Wrapper = styled.div`
     --gap: 2.4rem;
@@ -18,18 +19,10 @@ const Wrapper = styled.div`
 `;
 
 const TVSeries = () => {
-    const details = {
-        title: 'tv-series',
-        category: {
-            trending: false,
-            movie: false,
-            tvseries: true,
-            bookmark: false,
-        },
-    };
+    const { getSectionProps } = useSection();
     return (
         <Wrapper>
-            <Section details={details} />
+            <Section {...getSectionProps()} />
         </Wrapper>
     );
 };

@@ -1,4 +1,5 @@
 import Section from 'components/organisms/Section/Section';
+import { useSection } from 'hooks/useSection';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -18,18 +19,10 @@ const Wrapper = styled.div`
 `;
 
 const Movies = () => {
-    const details = {
-        title: 'movies',
-        category: {
-            trending: false,
-            movie: true,
-            tvseries: false,
-            bookmark: false,
-        },
-    };
+    const { getSectionProps } = useSection();
     return (
         <Wrapper>
-            <Section details={details} />
+            <Section {...getSectionProps()} />
         </Wrapper>
     );
 };
