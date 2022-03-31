@@ -1,31 +1,14 @@
 import React from 'react';
 import Section from 'components/organisms/Section/Section';
 import { Wrapper } from './Home.styles';
+import { useSection } from 'hooks/useSection';
 
 const Home = () => {
-    const detailsForTrending = {
-        title: 'recommended for you',
-        category: {
-            trending: true,
-            movie: false,
-            tvseries: false,
-            bookmark: false,
-        },
-    };
-
-    const detailsForRecommended = {
-        title: 'recommended for you',
-        category: {
-            trending: false,
-            movie: true,
-            tvseries: true,
-            bookmark: false,
-        },
-    };
+    const { getSectionProps } = useSection();
     return (
         <Wrapper>
-            <Section details={detailsForTrending} trending />
-            <Section details={detailsForRecommended} />
+            <Section {...getSectionProps(true)} />
+            <Section {...getSectionProps()} />
         </Wrapper>
     );
 };
