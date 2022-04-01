@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useCallback } from 'react';
 
 export const useMedia = () => {
-    const getMedia = useCallback(async ({ trending, movie, tvseries, bookmark }) => {
+    const getMedia = useCallback(async ({ trending, movie, tvseries, bookmark, searchValue }) => {
         try {
             const { data } = await axios.post('/media', {
                 trending,
                 movie,
                 tvseries,
                 bookmark,
+                searchValue,
             });
             return data.media;
         } catch (e) {

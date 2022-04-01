@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useMedia } from 'hooks/useMedia';
+import { SearchContext } from 'components/templates/MainTemplate';
 
 const Section = ({ title, category: { trending, movie, tvseries, bookmark } }) => {
     const [media, setMedia] = useState([]);
     const { getMedia } = useMedia();
+    const { searchValue } = useContext(SearchContext);
+
     useEffect(() => {
         (async () => {
-            const media = (await getMedia({ trending, movie, tvseries, bookmark })) || [];
+            const media = (await getMedia({ trending, movie, tvseries, bookmark, searchValue })) || [];
             setMedia(media);
         })();
-    }, [getMedia, trending, movie, tvseries, bookmark]);
+    }, [getMedia, trending, movie, tvseries, bookmark, searchValue]);
 
     return (
         <SectionStyles trending={trending}>
