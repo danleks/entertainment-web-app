@@ -1,14 +1,17 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
 import { useMedia } from 'hooks/useMedia';
 import { useCombobox } from 'downshift';
 import { useLocation } from 'react-router-dom';
+import { SearchContext } from 'components/templates/MainTemplate';
 
 const SearchBar = ({ placeholder }) => {
     const { pathname } = useLocation();
     const [search, setSearch] = useState([]);
     const { findMedia } = useMedia();
+
+    const { handleSearchValue } = useContext(SearchContext);
 
     const handleMediaSearch = useCallback(
         async (valueObj) => {
@@ -18,14 +21,20 @@ const SearchBar = ({ placeholder }) => {
         [findMedia, pathname],
     );
 
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        handleSearchValue(search[0]?.title);
+    };
+
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
         items: search,
         itemToString: (item) => (item ? item.title : ''),
         onInputValueChange: handleMediaSearch,
+        onSelectedItemChange: () => handleSearchValue(search[0]?.title),
     });
 
     return (
-        <Wrapper {...getComboboxProps()}>
+        <Wrapper {...getComboboxProps()} onSubmit={handleFormSubmit}>
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={placeholder} />
             <ResultsWrapper isVisible={isOpen && search.length}>

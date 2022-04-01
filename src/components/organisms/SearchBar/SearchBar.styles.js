@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SearchIcon from 'assets/icons/icon-search.svg';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
     position: relative;
     display: flex;
     ${'' /* justify-content: center; */}
