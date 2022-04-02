@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const ViewWrapper = styled.div`
     --gap: 2.4rem;
     display: flex;
     flex-direction: column;
