@@ -8,29 +8,32 @@ import { SearchContext } from 'providers/SearchProvider';
 
 const SearchBar = ({ placeholder }) => {
     const { pathname } = useLocation();
+    const [inputValue, setInputValue] = useState('');
     const [search, setSearch] = useState([]);
     const { findMedia } = useMedia();
 
     const { handleSearchValue } = useContext(SearchContext);
 
     const handleMediaSearch = useCallback(
-        async (valueObj) => {
-            const res = await findMedia(valueObj, pathname);
+        async ({ inputValue }) => {
+            setInputValue(inputValue);
+            const res = await findMedia(inputValue, pathname);
             setSearch(res);
+            //handleSearchValue(inputValue);
         },
         [findMedia, pathname],
     );
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        handleSearchValue(search[0]?.title);
+        handleSearchValue(inputValue);
     };
 
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
         items: search,
         itemToString: (item) => (item ? item.title : ''),
         onInputValueChange: handleMediaSearch,
-        onSelectedItemChange: () => handleSearchValue(search[0]?.title),
+        onSelectedItemChange: ({ inputValue }) => handleSearchValue(inputValue),
     });
 
     return (
