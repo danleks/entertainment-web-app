@@ -8,7 +8,7 @@ const MainTemplate = ({ children }) => {
     return (
         <Wrapper>
             <Navigation />
-            <SearchBar placeholder="Search for movies or TV series" />
+            <SearchBar />
             {children}
         </Wrapper>
     );
