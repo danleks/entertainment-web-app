@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SectionTitleStyles } from './SectionTitle.style';
+import { SectionTitleStyles } from './SectionTitle.styles';
 
 const SectionTitle = ({ trending, children }) => {
     return <SectionTitleStyles trending={trending}>{children}</SectionTitleStyles>;

@@ -1,14 +1,24 @@
 import { useLocation } from 'react-router-dom';
 
+const TITLE = {
+    trending: 'Trending',
+    recommended: 'Recommended for you',
+    movies: 'Movies',
+    tvseries: 'TV-Series',
+    bookmarks: {
+        movies: 'Bookmarked Movies',
+        tvseries: 'Bookmarked TV Series',
+    },
+};
+
 export const useSection = () => {
     const { pathname } = useLocation();
 
     const getSectionProps = (trending) => {
         //TODO: rewrite to switch
-        const title = pathname.split('/');
         if (pathname === '/' && trending) {
             return {
-                title: 'trending',
+                title: TITLE.trending,
                 category: {
                     trending: true,
                     movie: false,
@@ -20,7 +30,7 @@ export const useSection = () => {
 
         if (pathname === '/' && !trending) {
             return {
-                title: 'recommended for you',
+                title: TITLE.recommended,
                 category: {
                     trending: false,
                     movie: true,
@@ -32,7 +42,7 @@ export const useSection = () => {
 
         if (pathname === '/movies') {
             return {
-                title,
+                title: TITLE.movies,
                 category: {
                     trending: false,
                     movie: true,
@@ -44,7 +54,7 @@ export const useSection = () => {
 
         if (pathname === '/tv-series') {
             return {
-                title,
+                title: TITLE.tvseries,
                 category: {
                     trending: false,
                     movie: false,
@@ -56,7 +66,7 @@ export const useSection = () => {
 
         if (pathname === '/bookmarks') {
             return {
-                title,
+                title: '!! TODO !!',
                 category: {
                     trending: false,
                     movie: false,

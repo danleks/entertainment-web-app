@@ -20,7 +20,9 @@ const Section = ({ title, category: { trending, movie, tvseries, bookmark } }) =
 
     return (
         <SectionStyles trending={trending}>
-            <SectionTitle trending={trending}>{title}</SectionTitle>
+            <SectionTitle trending={trending}>
+                {searchValue ? `Found ${media.length} result${media.length > 1 ? 's' : ''} for ‘${searchValue}’` : title}
+            </SectionTitle>
             <MediaWrapper trending={trending}>
                 {media.map((item) => {
                     return (
