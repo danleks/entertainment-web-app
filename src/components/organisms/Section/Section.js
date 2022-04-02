@@ -4,7 +4,7 @@ import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useMedia } from 'hooks/useMedia';
-import { SearchContext } from 'components/templates/MainTemplate';
+import { SearchContext } from 'providers/SearchProvider';
 
 const Section = ({ title, category: { trending, movie, tvseries, bookmark } }) => {
     const [media, setMedia] = useState([]);

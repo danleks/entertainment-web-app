@@ -4,7 +4,7 @@ import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, Re
 import { useMedia } from 'hooks/useMedia';
 import { useCombobox } from 'downshift';
 import { useLocation } from 'react-router-dom';
-import { SearchContext } from 'components/templates/MainTemplate';
+import { SearchContext } from 'providers/SearchProvider';
 
 const SearchBar = ({ placeholder }) => {
     const { pathname } = useLocation();
