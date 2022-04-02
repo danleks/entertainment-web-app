@@ -16,9 +16,10 @@ export const useMedia = () => {
             console.log(e);
         }
     }, []);
-    const findMedia = useCallback(async (value, pathname) => {
+    const findMedia = useCallback(async (searchValue, pathname) => {
+        console.log(searchValue);
         const { data } = await axios.post('/search', {
-            searchValue: value.inputValue,
+            searchValue,
             pathname,
         });
         return data.media;
