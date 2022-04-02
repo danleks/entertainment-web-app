@@ -12,6 +12,15 @@ const SearchBar = ({ placeholder }) => {
     const [search, setSearch] = useState([]);
     const { findMedia } = useMedia();
 
+    const getPlaceholderText = () => {
+        return (
+            (pathname === '/' && 'Search for movies or TV series') ||
+            (pathname === '/movies' && 'Search for movies') ||
+            (pathname === '/tv-series' && 'Search for TV series') ||
+            (pathname === '/bookmarks' && 'Search for bookmarked shows')
+        );
+    };
+
     const { handleSearchValue } = useContext(SearchContext);
 
     const handleMediaSearch = useCallback(
@@ -19,7 +28,6 @@ const SearchBar = ({ placeholder }) => {
             setInputValue(inputValue);
             const res = await findMedia(inputValue, pathname);
             setSearch(res);
-            //handleSearchValue(inputValue);
         },
         [findMedia, pathname],
     );
@@ -39,7 +47,7 @@ const SearchBar = ({ placeholder }) => {
     return (
         <Wrapper {...getComboboxProps()} onSubmit={handleFormSubmit}>
             <SearchIconStyles />
-            <InputStyles {...getInputProps()} placeholder={placeholder} />
+            <InputStyles {...getInputProps()} placeholder={getPlaceholderText()} />
             <ResultsWrapper isVisible={isOpen && search.length}>
                 <h2>Search {pathname === '/' ? 'movies or tv-series' : pathname.split('/')}</h2>
                 <ResultsList {...getMenuProps()}>
