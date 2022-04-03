@@ -16,50 +16,32 @@ const CATEGORY = {
 
 export const handlers = [
     rest.post('/media', (req, res, ctx) => {
-        const { trending, movie, tvseries, bookmark, searchValue } = req.body;
+        const { props, searchValue } = req.body;
+        console.log(props);
         const searchRegex = new RegExp(searchValue, 'gi');
-
-        const matchingMedia =
-            searchValue.length > 0
-                ? media
-                      .filter(({ title }) => title.match(searchRegex))
-                      .filter((item) => {
-                          return (
-                              (trending && item.isTrending) ||
-                              (movie && tvseries && item) ||
-                              (movie && item.category === CATEGORY.movie) ||
-                              (tvseries && item.category === CATEGORY.tvseries) ||
-                              (bookmark && item.isBookmarked)
-                          );
-                      })
-                : media.filter((item) => {
-                      return (
-                          (trending && item.isTrending) ||
-                          (movie && tvseries && item) ||
-                          (movie && item.category === CATEGORY.movie) ||
-                          (tvseries && item.category === CATEGORY.tvseries) ||
-                          (bookmark && item.isBookmarked)
-                      );
-                  });
+        const matchingMedia = media.filter((item) => {
+            return (
+                (!props.bookmark && props.isTrending && item.isTrending && item.title.match(searchRegex)) ||
+                (!props.bookmark && props.notIsTrending && !item.isTrending && item.title.match(searchRegex)) ||
+                (!props.bookmark && props.movie && item.category === CATEGORY.movie && item.title.match(searchRegex)) ||
+                (!props.bookmark && props.tvseries && item.category === CATEGORY.tvseries && item.title.match(searchRegex)) ||
+                (props.bookmark && props.movie && item.isBookmarked && item.category === CATEGORY.movie && item.title.match(searchRegex)) ||
+                (props.bookmark && props.tvseries && item.isBookmarked && item.category === CATEGORY.tvseries && item.title.match(searchRegex))
+            );
+        });
         return res(ctx.status(200), ctx.delay(100), ctx.json({ media: matchingMedia }));
     }),
     rest.post('/search', (req, res, ctx) => {
         const { pathname, searchValue } = req.body;
         const searchRegex = new RegExp(searchValue, 'gi');
-        const matchingMedia =
-            searchValue.length > 0
-                ? pathname !== PATH_NAME.root
-                    ? media
-                          .filter(({ category, isBookmarked }) => {
-                              return (
-                                  (pathname === PATH_NAME.movies && category.match(/movie/gi)) ||
-                                  (pathname === PATH_NAME.tvseries && category.match(/tv/gi)) ||
-                                  (pathname === PATH_NAME.bookmarks && isBookmarked)
-                              );
-                          })
-                          .filter(({ title }) => title.match(searchRegex))
-                    : media.filter(({ title }) => title.match(searchRegex))
-                : [];
+        const matchingMedia = media.filter((item) => {
+            return (
+                (pathname === PATH_NAME.root && item.category.match(/movie/gi) && item.category.match(/tv/gi) && item.title.match(searchRegex)) ||
+                (pathname === PATH_NAME.movies && item.category.match(/movie/gi) && item.title.match(searchRegex)) ||
+                (pathname === PATH_NAME.tvseries && item.category.match(/tv/gi) && item.title.match(searchRegex)) ||
+                (pathname === PATH_NAME.bookmarks && item.isBookmarked && item.title.match(searchRegex))
+            );
+        });
 
         return res(ctx.status(200), ctx.delay(300), ctx.json({ media: matchingMedia }));
     }),
