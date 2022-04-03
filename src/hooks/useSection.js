@@ -14,7 +14,7 @@ const TITLE = {
 export const useSection = () => {
     const { pathname } = useLocation();
 
-    const getSectionProps = (trending) => {
+    const getSectionProps = (trending = false, category = '') => {
         //TODO: rewrite to switch
         if (pathname === '/' && trending) {
             return {
@@ -66,11 +66,11 @@ export const useSection = () => {
 
         if (pathname === '/bookmarks') {
             return {
-                title: '!! TODO !!',
+                title: TITLE.bookmarks[category.toLowerCase().split('-').join('')],
                 category: {
                     trending: false,
-                    movie: false,
-                    tvseries: false,
+                    movie: category === 'movies' ? true : false,
+                    tvseries: category === 'tv-series' ? true : false,
                     bookmark: true,
                 },
             };

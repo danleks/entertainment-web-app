@@ -1,14 +1,14 @@
 import Section from 'components/organisms/Section/Section';
-import React from 'react';
-import { useSection } from 'hooks/useSection';
+import React, { useContext } from 'react';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
+import { SearchContext } from 'providers/SearchProvider';
 
 const Bookmarks = () => {
-    const { getSectionProps } = useSection();
-
+    const { searchValue } = useContext(SearchContext);
     return (
         <ViewWrapper>
-            <Section {...getSectionProps()} />
+            <Section bookmark movie />
+            <Section bookmark tvseries />
         </ViewWrapper>
     );
 };

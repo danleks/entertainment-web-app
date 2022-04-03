@@ -6,26 +6,26 @@ import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.sv
 import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.styles';
 import { THUMBNAIL_SHAPE } from 'types/thumbnailTypes';
 
-const Thumbnail = ({ item: { title, thumbnail, year, category, rating, isBookmarked, isTrending } }) => {
+const Thumbnail = ({ item, trending, handleBookmarks }) => {
     return (
-        <Wrapper thumbnail={thumbnail} trending={isTrending}>
+        <Wrapper thumbnail={item.thumbnail} trending={trending}>
             <Play>
                 <PlayIcon />
                 <span>Play</span>
             </Play>
-            <BookmarkLogoWrapper>
+            <BookmarkLogoWrapper onClick={() => handleBookmarks(item)}>
                 <BookmarkLogo />
             </BookmarkLogoWrapper>
-            <DetailsWrapper trending={isTrending}>
-                <Details trending={isTrending}>
-                    <span>{year}</span>
-                    <CategoryWrapper trending={isTrending}>
+            <DetailsWrapper trending={trending}>
+                <Details trending={trending}>
+                    <span>{item.year}</span>
+                    <CategoryWrapper trending={trending}>
                         <MovieIcon />
-                        {category}
+                        {item.category}
                     </CategoryWrapper>
-                    <span>{rating}</span>
+                    <span>{item.rating}</span>
                 </Details>
-                <Title trending={isTrending}>{title}</Title>
+                <Title trending={trending}>{item.title}</Title>
             </DetailsWrapper>
         </Wrapper>
     );
