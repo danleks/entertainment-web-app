@@ -16,20 +16,19 @@ const CATEGORY = {
 
 export const handlers = [
     rest.post('/media', (req, res, ctx) => {
-        const { props, searchValue } = req.body;
-        console.log(props);
-        const searchRegex = new RegExp(searchValue, 'gi');
-        const matchingMedia = media.filter((item) => {
-            return (
-                (!props.bookmark && props.isTrending && item.isTrending && item.title.match(searchRegex)) ||
-                (!props.bookmark && props.notIsTrending && !item.isTrending && item.title.match(searchRegex)) ||
-                (!props.bookmark && props.movie && item.category === CATEGORY.movie && item.title.match(searchRegex)) ||
-                (!props.bookmark && props.tvseries && item.category === CATEGORY.tvseries && item.title.match(searchRegex)) ||
-                (props.bookmark && props.movie && item.isBookmarked && item.category === CATEGORY.movie && item.title.match(searchRegex)) ||
-                (props.bookmark && props.tvseries && item.isBookmarked && item.category === CATEGORY.tvseries && item.title.match(searchRegex))
-            );
-        });
-        return res(ctx.status(200), ctx.delay(100), ctx.json({ media: matchingMedia }));
+        // const { searchValue } = req.body;
+        // const searchRegex = new RegExp(searchValue, 'gi');
+        // const matchingMedia = media.filter((item) => {
+        //     return (
+        //         (!props.bookmark && props.isTrending && item.isTrending && item.title.match(searchRegex)) ||
+        //         (!props.bookmark && props.notIsTrending && !item.isTrending && item.title.match(searchRegex)) ||
+        //         (!props.bookmark && props.movie && item.category === CATEGORY.movie && item.title.match(searchRegex)) ||
+        //         (!props.bookmark && props.tvseries && item.category === CATEGORY.tvseries && item.title.match(searchRegex)) ||
+        //         (props.bookmark && props.movie && item.isBookmarked && item.category === CATEGORY.movie && item.title.match(searchRegex)) ||
+        //         (props.bookmark && props.tvseries && item.isBookmarked && item.category === CATEGORY.tvseries && item.title.match(searchRegex))
+        //     );
+        // });
+        return res(ctx.status(200), ctx.delay(100), ctx.json({ media }));
     }),
     rest.post('/search', (req, res, ctx) => {
         const { pathname, searchValue } = req.body;
