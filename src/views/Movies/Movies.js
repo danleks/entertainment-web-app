@@ -2,10 +2,12 @@ import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 import Section from 'components/organisms/Section/Section';
 import React from 'react';
 
-const Movies = () => {
+const Movies = ({ media, handleBookmarks }) => {
+    const movies = media.filter((item) => item.category === 'Movie');
+
     return (
         <ViewWrapper>
-            <Section movie />
+            <Section media={movies} handleBookmarks={handleBookmarks} />
         </ViewWrapper>
     );
 };
