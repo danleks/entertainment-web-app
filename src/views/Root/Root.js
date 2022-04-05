@@ -30,7 +30,8 @@ const Root = () => {
             let index = prevState.findIndex((i) => i.title === item.title);
             prevState[index].isBookmarked = !prevState[index].isBookmarked;
             console.log(prevState[index]);
-            return prevState;
+
+            return [...prevState];
         });
     };
     return (
