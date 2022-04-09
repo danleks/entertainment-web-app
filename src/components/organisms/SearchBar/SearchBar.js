@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
 import { useMedia } from 'hooks/useMedia';
@@ -6,11 +6,15 @@ import { useCombobox } from 'downshift';
 import { useLocation } from 'react-router-dom';
 import { SearchContext } from 'providers/SearchProvider';
 
-const SearchBar = ({ placeholder }) => {
+const SearchBar = ({ handleMediaSearch, searchResult }) => {
     const { pathname } = useLocation();
     const [inputValue, setInputValue] = useState('');
     const [search, setSearch] = useState([]);
     const { findMedia } = useMedia();
+
+    useEffect(() => {
+        console.log(searchResult);
+    }, [searchResult]);
 
     const getPlaceholderText = () => {
         return (
@@ -23,14 +27,14 @@ const SearchBar = ({ placeholder }) => {
 
     const { handleSearchValue } = useContext(SearchContext);
 
-    const handleMediaSearch = useCallback(
-        async ({ inputValue }) => {
-            setInputValue(inputValue);
-            const res = await findMedia(inputValue, pathname);
-            setSearch(res);
-        },
-        [findMedia, pathname],
-    );
+    // const handleMediaSearch = useCallback(
+    //     async ({ inputValue }) => {
+    //         setInputValue(inputValue);
+    //         const res = await findMedia(inputValue, pathname);
+    //         setSearch(res);
+    //     },
+    //     [findMedia, pathname],
+    // );
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -38,9 +42,9 @@ const SearchBar = ({ placeholder }) => {
     };
 
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
-        items: search,
+        items: searchResult,
         itemToString: (item) => (item ? item.title : ''),
-        onInputValueChange: handleMediaSearch,
+        onInputValueChange: ({ inputValue }) => handleMediaSearch(inputValue),
         onSelectedItemChange: ({ inputValue }) => handleSearchValue(inputValue),
     });
 
@@ -48,11 +52,11 @@ const SearchBar = ({ placeholder }) => {
         <Wrapper {...getComboboxProps()} onSubmit={handleFormSubmit}>
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={getPlaceholderText()} />
-            <ResultsWrapper isVisible={isOpen && search.length}>
+            <ResultsWrapper isVisible={isOpen && searchResult.length}>
                 <h2>Search {pathname === '/' ? 'movies or tv-series' : pathname.split('/')}</h2>
                 <ResultsList {...getMenuProps()}>
                     {isOpen &&
-                        search.map((item, index) => {
+                        searchResult.map((item, index) => {
                             return (
                                 <ResultsItem
                                     isHighlighted={highlightedIndex === index}
@@ -67,10 +71,6 @@ const SearchBar = ({ placeholder }) => {
             </ResultsWrapper>
         </Wrapper>
     );
-};
-
-SearchBar.propTypes = {
-    placeholder: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

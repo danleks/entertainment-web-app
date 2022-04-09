@@ -7,8 +7,8 @@ const Bookmarks = ({ media, handleBookmarks }) => {
     const tvSeriesBookmarks = media.filter((item) => item.isBookmarked && item.category === 'TV Series');
     return (
         <ViewWrapper>
-            <Section media={movieBookmarks} handleBookmarks={handleBookmarks} />
-            <Section media={tvSeriesBookmarks} handleBookmarks={handleBookmarks} />
+            {movieBookmarks.length > 0 ? <Section media={movieBookmarks} handleBookmarks={handleBookmarks} /> : null}
+            {tvSeriesBookmarks.length > 0 ? <Section media={tvSeriesBookmarks} handleBookmarks={handleBookmarks} /> : null}
         </ViewWrapper>
     );
 };
