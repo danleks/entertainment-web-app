@@ -16,20 +16,29 @@ const CATEGORY = {
 
 export const handlers = [
     rest.post('/media', (req, res, ctx) => {
+        const { item, pathname } = req.body;
+        if (item === null) return res(ctx.status(200), ctx.delay(100), ctx.json({ media }));
+        let index = media.findIndex((i) => i.title === item.title);
+        media[index].isBookmarked = !media[index].isBookmarked;
         return res(ctx.status(200), ctx.delay(100), ctx.json({ media }));
     }),
     rest.post('/search', (req, res, ctx) => {
-        const { pathname, searchValue } = req.body;
-        console.log(pathname);
-        const searchRegex = new RegExp(searchValue, 'gi');
-        const matchingMedia = media.filter((item) => {
-            return (
-                (pathname === PATH_NAME.root && item.category.match(/movie/gi) && item.category.match(/tv/gi) && item.title.match(searchRegex)) ||
-                (pathname === PATH_NAME.movies && item.category.match(/movie/gi) && item.title.match(searchRegex)) ||
-                (pathname === PATH_NAME.tvseries && item.category.match(/tv/gi) && item.title.match(searchRegex)) ||
-                (pathname === PATH_NAME.bookmarks && item.isBookmarked && item.title.match(searchRegex))
-            );
-        });
+        const { pathname, inputValue } = req.body;
+        const searchRegex = new RegExp(inputValue, 'gi');
+        const matchingMedia = inputValue
+            ? media.filter((item) => {
+                  switch (pathname) {
+                      case PATH_NAME.movies:
+                          return item.category === CATEGORY.movie && item.title.match(searchRegex);
+                      case PATH_NAME.tvseries:
+                          return item.category === CATEGORY.tvseries && item.title.match(searchRegex);
+                      case PATH_NAME.bookmarks:
+                          return item.isBookmarked && item.title.match(searchRegex);
+                      default:
+                          return item.title.match(searchRegex);
+                  }
+              })
+            : [];
 
         return res(ctx.status(200), ctx.delay(300), ctx.json({ media: matchingMedia }));
     }),

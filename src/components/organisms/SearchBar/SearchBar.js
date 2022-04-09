@@ -5,16 +5,13 @@ import { useMedia } from 'hooks/useMedia';
 import { useCombobox } from 'downshift';
 import { useLocation } from 'react-router-dom';
 import { SearchContext } from 'providers/SearchProvider';
+import { AppContext } from 'providers/AppProvider';
 
-const SearchBar = ({ handleMediaSearch, searchResult }) => {
+const SearchBar = () => {
     const { pathname } = useLocation();
     const [inputValue, setInputValue] = useState('');
     const [search, setSearch] = useState([]);
     const { findMedia } = useMedia();
-
-    useEffect(() => {
-        console.log(searchResult);
-    }, [searchResult]);
 
     const getPlaceholderText = () => {
         return (
@@ -25,31 +22,17 @@ const SearchBar = ({ handleMediaSearch, searchResult }) => {
         );
     };
 
-    const { handleSearchValue } = useContext(SearchContext);
-
-    // const handleMediaSearch = useCallback(
-    //     async ({ inputValue }) => {
-    //         setInputValue(inputValue);
-    //         const res = await findMedia(inputValue, pathname);
-    //         setSearch(res);
-    //     },
-    //     [findMedia, pathname],
-    // );
-
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        handleSearchValue(inputValue);
-    };
+    const { searchResult, handleMediaSearch, handleFormSubmit } = useContext(AppContext);
 
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
         items: searchResult,
         itemToString: (item) => (item ? item.title : ''),
         onInputValueChange: ({ inputValue }) => handleMediaSearch(inputValue),
-        onSelectedItemChange: ({ inputValue }) => handleSearchValue(inputValue),
+        onSelectedItemChange: ({ inputValue }) => handleMediaSearch(inputValue),
     });
 
     return (
-        <Wrapper {...getComboboxProps()} onSubmit={handleFormSubmit}>
+        <Wrapper {...getComboboxProps()} onSubmit={(e) => handleFormSubmit(e)}>
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={getPlaceholderText()} />
             <ResultsWrapper isVisible={isOpen && searchResult.length}>
