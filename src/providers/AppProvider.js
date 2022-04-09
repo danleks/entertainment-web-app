@@ -26,19 +26,16 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
         (async () => {
             console.log(pathname);
-            const media = (await getMedia(null, pathname)) || [];
+            const media = (await getMedia(null)) || [];
             setMedia(media);
         })();
     }, [getMedia, pathname]);
 
     const handleBookmarks = (item) => {
-        // (async () => {
-        //     const media = (await getMedia(item)) || [];
-        //     setMedia(media);
-        // })();
-        // let index = media.findIndex((i) => i.title === item.title);
-        // media[index].isBookmarked = !media[index].isBookmarked;
-        // setMedia([...media]);
+        (async () => {
+            const media = (await getMedia(item)) || [];
+            setMedia(media);
+        })();
     };
 
     const handleMediaSearch = useCallback(

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as BookmarkLogo } from 'assets/icons/icon-bookmark-empty.svg';
 import { ReactComponent as PlayIcon } from 'assets/icons/icon-play.svg';
 import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.svg';
 import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.styles';
 import { THUMBNAIL_SHAPE } from 'types/thumbnailTypes';
+import { AppContext } from 'providers/AppProvider';
 
-const Thumbnail = ({ item, trending, handleBookmarks }) => {
+const Thumbnail = ({ item, trending }) => {
+    const { handleBookmarks } = useContext(AppContext);
+
     return (
         <Wrapper thumbnail={item.thumbnail} trending={trending}>
             <Play>
