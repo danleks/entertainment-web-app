@@ -4,11 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper } from './MainTemplate.styles';
 
-const MainTemplate = ({ children }) => {
+const MainTemplate = ({ children, handleMediaSearch, searchResult }) => {
     return (
         <Wrapper>
             <Navigation />
-            <SearchBar />
+            <SearchBar handleMediaSearch={handleMediaSearch} searchResult={searchResult} />
             {children}
         </Wrapper>
     );
