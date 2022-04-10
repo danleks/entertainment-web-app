@@ -1,29 +1,13 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
-import { useMedia } from 'hooks/useMedia';
 import { useCombobox } from 'downshift';
 import { useLocation } from 'react-router-dom';
-import { SearchContext } from 'providers/SearchProvider';
 import { AppContext } from 'providers/AppProvider';
+import { getPlaceholderText } from 'helpers/getPlaceholderText';
 
 const SearchBar = () => {
     const { pathname } = useLocation();
-    const [inputValue, setInputValue] = useState('');
-    const [search, setSearch] = useState([]);
-    const { findMedia } = useMedia();
-
-    const getPlaceholderText = () => {
-        return (
-            (pathname === '/' && 'Search for movies or TV series') ||
-            (pathname === '/movies' && 'Search for movies') ||
-            (pathname === '/tv-series' && 'Search for TV series') ||
-            (pathname === '/bookmarks' && 'Search for bookmarked shows')
-        );
-    };
-
     const { searchResult, handleMediaSearch, handleFormSubmit } = useContext(AppContext);
-
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
         items: searchResult,
         itemToString: (item) => (item ? item.title : ''),
@@ -34,7 +18,7 @@ const SearchBar = () => {
     return (
         <Wrapper {...getComboboxProps()} onSubmit={(e) => handleFormSubmit(e)}>
             <SearchIconStyles />
-            <InputStyles {...getInputProps()} placeholder={getPlaceholderText()} />
+            <InputStyles {...getInputProps()} placeholder={getPlaceholderText(pathname)} />
             <ResultsWrapper isVisible={isOpen && searchResult.length}>
                 <h2>Search {pathname === '/' ? 'movies or tv-series' : pathname.split('/')}</h2>
                 <ResultsList {...getMenuProps()}>

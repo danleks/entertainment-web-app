@@ -1,49 +1,50 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
 import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
-import { useMedia } from 'hooks/useMedia';
-import { SearchContext } from 'providers/SearchProvider';
 import { useLocation } from 'react-router-dom';
+import { AppContext } from 'providers/AppProvider';
+import { getTitle } from 'helpers/getTitle';
 
-const Section = ({ media, trending, handleBookmarks }) => {
-    // const [media, setMedia] = useState([]);
-    // const { getMedia } = useMedia();
-    const { searchValue } = useContext(SearchContext);
-
+const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
+    const [filteredMedia, setFilteredMedia] = useState([]);
     const { pathname } = useLocation();
-    // const { isTrending } = props;
+    const { media, handleBookmarks, searchResult, inputVal } = useContext(AppContext);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const media = (await getMedia(props, searchValue)) || [];
-    //         setMedia(media);
-    //     })();
-    // }, [getMedia, props, searchValue]);
+    const handleFilteredMedia = useCallback(() => {
+        let newMedia = media.filter((item) => {
+            if (pathname === '/' && trending) {
+                return item.isTrending;
+            } else if (pathname === '/' && !trending) {
+                return inputVal ? !item.isTrending && item.title.toLowerCase().includes(inputVal.toLowerCase()) : !item.isTrending;
+            } else if (pathname === '/movies') {
+                return item.category === 'Movie';
+            } else if (pathname === '/tv-series') {
+                return item.category === 'TV Series';
+            } else if (pathname === '/bookmarks' && bookmarkedMovie) {
+                return item.isBookmarked && item.category === 'Movie';
+            } else if (pathname === '/bookmarks' && bookmarkedTVSeries) {
+                return item.isBookmarked && item.category === 'TV Series';
+            }
+        });
 
-    // TODO: move to helpers folder
-    // const getTitle = (props) => {
-    //     if (props.isTrending) {
-    //         return 'Trending';
-    //     } else if (props.notIsTrending) {
-    //         return 'Recommended for you';
-    //     } else if (props.movie) {
-    //         return 'Movies';
-    //     } else if (props.tvseries) {
-    //         return 'TV Series';
-    //     } else if (props.bookmark) {
-    //         return 'Bookmarked Movies';
-    //     }
-    // };
+        setFilteredMedia(newMedia);
+    }, [media, trending, bookmarkedMovie, bookmarkedTVSeries, pathname, inputVal]);
+
+    useEffect(() => {
+        handleFilteredMedia();
+    }, [handleFilteredMedia]);
 
     return (
         <SectionStyles trending={trending && pathname === '/'}>
             <SectionTitle trending={trending && pathname === '/'}>
-                {searchValue ? `Found ${media.length} result${media.length > 1 ? 's' : ''} for ‘${searchValue}’` : 'title'}
+                {searchResult.length > 0
+                    ? `Found ${searchResult.length} result${searchResult.length > 1 ? 's' : ''} for ‘${inputVal}’`
+                    : getTitle(pathname, trending, bookmarkedMovie, bookmarkedTVSeries)}
             </SectionTitle>
             <MediaWrapper trending={trending && pathname === '/'}>
-                {media.map((item) => {
+                {filteredMedia.map((item) => {
                     return (
                         <MediaItem key={item.title}>
                             <Thumbnail handleBookmarks={handleBookmarks} item={item} trending={trending && pathname === '/'} />

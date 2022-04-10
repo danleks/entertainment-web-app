@@ -9,7 +9,6 @@ import { Routes, Route } from 'react-router-dom';
 import Movies from 'views/Movies/Movies';
 import TVSeries from 'views/TV-Series/TV-Series';
 import Bookmarks from 'views/Bookmarks/Bookmarks';
-import SearchProvider from 'providers/SearchProvider';
 import AppProvider from 'providers/AppProvider';
 
 const Root = () => {
@@ -17,18 +16,16 @@ const Root = () => {
         <ThemeProvider theme={theme}>
             <GlobalStyles />
             <AppProvider>
-                <SearchProvider>
-                    <MainTemplate>
-                        <Wrapper>
-                            <Routes>
-                                <Route exact path="/" element={<Home />} />
-                                <Route path="/movies" element={<Movies />} />
-                                <Route path="/tv-series" element={<TVSeries />} />
-                                <Route path="/bookmarks" element={<Bookmarks />} />
-                            </Routes>
-                        </Wrapper>
-                    </MainTemplate>
-                </SearchProvider>
+                <MainTemplate>
+                    <Wrapper>
+                        <Routes>
+                            <Route exact path="/" element={<Home />} />
+                            <Route path="/movies" element={<Movies />} />
+                            <Route path="/tv-series" element={<TVSeries />} />
+                            <Route path="/bookmarks" element={<Bookmarks />} />
+                        </Routes>
+                    </Wrapper>
+                </MainTemplate>
             </AppProvider>
         </ThemeProvider>
     );

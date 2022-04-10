@@ -18,6 +18,7 @@ export const handlers = [
     rest.post('/media', (req, res, ctx) => {
         const { item } = req.body;
         if (item === null) return res(ctx.status(200), ctx.delay(100), ctx.json({ media }));
+
         let index = media.findIndex((i) => i.title === item.title);
         media[index].isBookmarked = !media[index].isBookmarked;
         return res(ctx.status(200), ctx.delay(100), ctx.json({ media }));

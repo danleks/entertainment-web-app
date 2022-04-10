@@ -4,12 +4,9 @@ import React, { useContext } from 'react';
 import { AppContext } from 'providers/AppProvider';
 
 const Movies = () => {
-    const { media } = useContext(AppContext);
-    const movies = media.filter((item) => item.category === 'Movie');
-
     return (
         <ViewWrapper>
-            <Section media={movies} />
+            <Section />
         </ViewWrapper>
     );
 };
