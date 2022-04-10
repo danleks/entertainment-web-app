@@ -17,6 +17,7 @@ const CATEGORY = {
 };
 
 const AppProvider = ({ children }) => {
+    const [inputVal, setInputVal] = useState('');
     const [media, setMedia] = useState([]);
     const [searchResult, setSearchResult] = useState([]);
 
@@ -25,21 +26,21 @@ const AppProvider = ({ children }) => {
 
     useEffect(() => {
         (async () => {
-            console.log(pathname);
-            const media = (await getMedia(null)) || [];
+            const media = (await getMedia()) || [];
             setMedia(media);
         })();
     }, [getMedia, pathname]);
 
     const handleBookmarks = (item) => {
         (async () => {
-            const media = (await getMedia(item)) || [];
+            const media = (await getMedia(item, searchResult)) || [];
             setMedia(media);
         })();
     };
 
     const handleMediaSearch = useCallback(
-        async (inputValue, tes) => {
+        async (inputValue) => {
+            setInputVal(inputValue);
             const res = await findMedia(inputValue, pathname);
             setSearchResult(res);
         },
@@ -48,11 +49,13 @@ const AppProvider = ({ children }) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // handleSearchValue(inputValue);
+        handleMediaSearch(inputVal);
     };
 
     return (
-        <AppContext.Provider value={{ media, searchResult, handleBookmarks, handleMediaSearch, handleFormSubmit }}>{children}</AppContext.Provider>
+        <AppContext.Provider value={{ media, searchResult, handleBookmarks, handleMediaSearch, handleFormSubmit, inputVal }}>
+            {children}
+        </AppContext.Provider>
     );
 };
 

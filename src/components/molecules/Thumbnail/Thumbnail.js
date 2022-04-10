@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { ReactComponent as BookmarkLogo } from 'assets/icons/icon-bookmark-empty.svg';
+import { ReactComponent as BookmarkLogoEmpty } from 'assets/icons/icon-bookmark-empty.svg';
+import { ReactComponent as BookmarkLogoFull } from 'assets/icons/icon-bookmark-full.svg';
 import { ReactComponent as PlayIcon } from 'assets/icons/icon-play.svg';
 import { ReactComponent as MovieIcon } from 'assets/icons/icon-category-movie.svg';
 import { BookmarkLogoWrapper, Details, DetailsWrapper, Wrapper, CategoryWrapper, Title, Play } from './Thumbnail.styles';
@@ -17,7 +18,7 @@ const Thumbnail = ({ item, trending }) => {
                 <span>Play</span>
             </Play>
             <BookmarkLogoWrapper onClick={() => handleBookmarks(item)}>
-                <BookmarkLogo />
+                {item.isBookmarked ? <BookmarkLogoFull /> : <BookmarkLogoEmpty />}
             </BookmarkLogoWrapper>
             <DetailsWrapper trending={trending}>
                 <Details trending={trending}>
