@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
         }
     }
 
-    & > div:nth-child(2) {
+    & > form {
         padding-left: 1.6rem;
         @media (min-width: 768px) {
             padding-left: 0;
@@ -38,7 +38,7 @@ export const Wrapper = styled.div`
         }
     }
 
-    & > div:nth-child(3) {
+    & > div {
         padding-left: 1.6rem;
         @media (min-width: 768px) {
             padding-left: 0;
