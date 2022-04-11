@@ -6,11 +6,24 @@ import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
 import { useLocation } from 'react-router-dom';
 import { AppContext } from 'providers/AppProvider';
 import { getTitle } from 'helpers/getTitle';
+//import Slider from 'react-slick';
+
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+
+// const settings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1.1,
+//     slidesToScroll: 1,
+// };
 
 const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
     const [filteredMedia, setFilteredMedia] = useState([]);
     const { pathname } = useLocation();
     const { media, handleBookmarks, searchResult, inputVal } = useContext(AppContext);
+    const [sliderPos, setSliderPos] = useState(0);
 
     const handleFilteredMedia = useCallback(() => {
         let newMedia = media.filter((item) => {
@@ -27,10 +40,17 @@ const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
             } else if (pathname === '/bookmarks' && bookmarkedTVSeries) {
                 return item.isBookmarked && item.category === 'TV Series';
             }
+            return item;
         });
 
         setFilteredMedia(newMedia);
     }, [media, trending, bookmarkedMovie, bookmarkedTVSeries, pathname, inputVal]);
+
+    const handleSlider = () => {
+        setSliderPos((prevState) => prevState + 510);
+        // if (sliderPos > 1000) setSliderPos(0);
+        console.log(sliderPos);
+    };
 
     useEffect(() => {
         handleFilteredMedia();
@@ -38,12 +58,13 @@ const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
 
     return (
         <SectionStyles trending={trending && pathname === '/'}>
+            {trending ? <button onClick={handleSlider}>move</button> : null}
             <SectionTitle trending={trending && pathname === '/'}>
                 {searchResult.length > 0
                     ? `Found ${searchResult.length} result${searchResult.length > 1 ? 's' : ''} for ‘${inputVal}’`
                     : getTitle(pathname, trending, bookmarkedMovie, bookmarkedTVSeries)}
             </SectionTitle>
-            <MediaWrapper trending={trending && pathname === '/'}>
+            <MediaWrapper sliderPos={trending && sliderPos} trending={trending && pathname === '/'}>
                 {filteredMedia.map((item) => {
                     return (
                         <MediaItem key={item.title}>

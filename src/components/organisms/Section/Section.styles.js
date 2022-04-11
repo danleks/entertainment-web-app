@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const SectionStyles = styled.section`
-    overflow-x: ${({ trending }) => (trending ? 'scroll' : 'unset')};
+    overflow: hidden;
+    ${'' /* overflow-x: ${({ trending }) => (trending ? 'scroll' : 'unset')}; */}
 `;
 
 export const MediaWrapper = styled.ul`
@@ -42,6 +43,10 @@ export const MediaWrapper = styled.ul`
         --colGapBasic: 4rem;
         --rowGapBasic: 8.4rem;
     }
+
+    /**corousel related styles */
+    transform: ${({ sliderPos }) => `translateX(${-sliderPos}px)`};
+    transition: 0.3s transform ease;
 `;
 
 export const MediaItem = styled.li`
