@@ -2,22 +2,18 @@ import React, { useContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/molecules/Thumbnail/Thumbnail';
 import SectionTitle from 'components/atoms/SectionTitle/SectionTitle';
-import { MediaWrapper, SectionStyles, MediaItem } from './Section.styles';
+import { MediaWrapper, SectionStyles, MediaItem, CarouselStyles, InnerStyles } from './Section.styles';
 import { useLocation } from 'react-router-dom';
 import { AppContext } from 'providers/AppProvider';
 import { getTitle } from 'helpers/getTitle';
-//import Slider from 'react-slick';
 
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-
-// const settings = {
-//     dots: true,
-//     infinite: true,
-//     speed: 500,
-//     slidesToShow: 1.1,
-//     slidesToScroll: 1,
-// };
+const Carousel = () => {
+    return (
+        <CarouselStyles>
+            <InnerStyles></InnerStyles>
+        </CarouselStyles>
+    );
+};
 
 const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
     const [filteredMedia, setFilteredMedia] = useState([]);
