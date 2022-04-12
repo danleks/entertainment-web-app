@@ -52,3 +52,12 @@ export const MediaWrapper = styled.ul`
 export const MediaItem = styled.li`
     list-style: none;
 `;
+
+export const CarouselStyles = styled.div`
+    overflow: hidden;
+`;
+
+export const InnerStyles = styled.div`
+    white-space: nowrap;
+    transition: transform 0.3s;
+`;
