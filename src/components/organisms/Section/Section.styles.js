@@ -43,21 +43,8 @@ export const MediaWrapper = styled.ul`
         --colGapBasic: 4rem;
         --rowGapBasic: 8.4rem;
     }
-
-    /**corousel related styles */
-    transform: ${({ sliderPos }) => `translateX(${-sliderPos}px)`};
-    transition: 0.3s transform ease;
 `;
 
 export const MediaItem = styled.li`
     list-style: none;
-`;
-
-export const CarouselStyles = styled.div`
-    overflow: hidden;
-`;
-
-export const InnerStyles = styled.div`
-    white-space: nowrap;
-    transition: transform 0.3s;
 `;
