@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
     color: ${({ theme }) => theme.c.white};
     background-color: ${({ theme }) => theme.c.darkBlue};
     overflow: hidden;
-    border: 1px solid white;
 
     @media (min-width: 768px) {
         gap: 3.3rem;
