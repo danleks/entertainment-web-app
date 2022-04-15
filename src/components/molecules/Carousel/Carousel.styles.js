@@ -10,7 +10,7 @@ export const InnerStyles = styled.ul`
     display: inline-flex;
     gap: var(--colGap);
     list-style: none;
-    transform: ${({ activeIndex }) => `translateX(-${activeIndex * 20}%)`};
+    transform: ${({ activeIndex }) => `translateX(-${activeIndex * 20.5}%)`};
     transition: transform 0.3s;
 
     @media (min-width: 768px) {
@@ -45,7 +45,16 @@ export const ControlStyles = styled.button`
     background-color: transparent;
     border: none;
     cursor: pointer;
-    border: 1px solid red;
+
+    & svg {
+        width: 3rem;
+        height: 3rem;
+        color: white;
+    }
+
+    &:hover {
+        background-color: ${({ theme }) => theme.c.blackSemitransparent};
+    }
 
     @media (min-width: 1000px) {
         width: 10%;
