@@ -12,6 +12,4 @@ export default {
 const Template = (args) => <SearchBar {...args} />;
 
 export const Empty = Template.bind({});
-Empty.args = {
-    placeholder: 'Search for movies or TV series',
-};
+Empty.args = {};
