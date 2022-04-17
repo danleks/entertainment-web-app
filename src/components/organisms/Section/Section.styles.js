@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const SectionStyles = styled.section`
-    overflow: hidden;
-    ${'' /* overflow-x: ${({ trending }) => (trending ? 'scroll' : 'unset')}; */}
+    display: block;
 `;
 
 export const MediaWrapper = styled.ul`

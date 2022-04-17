@@ -4,18 +4,18 @@ import SearchIcon from 'assets/icons/icon-search.svg';
 export const Wrapper = styled.form`
     position: relative;
     display: flex;
-    ${'' /* justify-content: center; */}
     align-items: center;
     gap: 1.6rem;
-    width: 100%;
+    width: 27.7rem;
 
     @media (min-width: 768px) {
+        width: 38.1rem;
         gap: 2.4rem;
     }
 `;
 
 export const InputStyles = styled.input`
-    width: 27.7rem;
+    width: 100%;
     border: none;
     border-bottom: 1px solid transparent;
     padding: 1rem 0;
@@ -27,7 +27,6 @@ export const InputStyles = styled.input`
     caret-color: ${({ theme }) => theme.c.red};
 
     @media (min-width: 768px) {
-        width: 38.1rem;
         font-size: 24px;
         background-size: 3.2rem;
     }
@@ -57,16 +56,18 @@ export const ResultsWrapper = styled.div`
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 3rem;
+    max-height: 30rem;
     transform: translateY(100%);
     z-index: 1;
     overflow-y: scroll;
-    background: ${({ theme }) => theme.c.darkBlue};
+    background: ${({ theme }) => theme.c.white};
+    border: 1px solid ${({ theme }) => theme.c.greyishBlue};
 
     h2 {
+        padding: 3rem 0 1rem 3rem;
         font-size: 13px;
         font-weight: ${({ theme }) => theme.fw.light};
-        color: ${({ theme }) => theme.c.whiteTransparent};
+        color: ${({ theme }) => theme.c.blackSemitransparent};
     }
 `;
 
@@ -78,7 +79,19 @@ export const ResultsList = styled.ul`
 `;
 
 export const ResultsItem = styled.li`
-    padding: 1rem 0;
-    color: ${({ theme }) => theme.c.white};
-    background-color: ${({ theme, isHighlighted }) => (isHighlighted ? theme.c.greyishBlue : '')};
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem 1rem 3rem;
+    color: ${({ theme }) => theme.c.darkBlue};
+    background-color: ${({ theme, isHighlighted }) => (isHighlighted ? '#edeeee' : '')};
+    cursor: pointer;
+
+    & > :first-child {
+        text-transform: lowercase;
+    }
+
+    & > :last-child {
+        text-transform: capitalize;
+        font-weight: ${({ theme }) => theme.fw.light};
+    }
 `;

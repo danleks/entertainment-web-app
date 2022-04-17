@@ -5,11 +5,11 @@ import { AppContext } from 'providers/AppProvider';
 import Carousel from 'components/molecules/Carousel/Carousel';
 
 const Home = () => {
-    const { searchResult } = useContext(AppContext);
+    const { searchedItems } = useContext(AppContext);
 
     return (
         <ViewWrapper>
-            {searchResult.length === 0 ? <Carousel /> : null}
+            {searchedItems.length === 0 ? <Carousel /> : null}
             <Section />
         </ViewWrapper>
     );

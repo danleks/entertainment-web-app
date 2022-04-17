@@ -10,12 +10,12 @@ import { getTitle } from 'helpers/getTitle';
 const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
     const [filteredMedia, setFilteredMedia] = useState([]);
     const { pathname } = useLocation();
-    const { media, handleBookmarks, searchResult, inputVal } = useContext(AppContext);
+    const { media, handleBookmarks, searchedItems, inputVal } = useContext(AppContext);
 
     const handleFilteredMedia = useCallback(() => {
         let newMedia = media.filter((item) => {
             if (pathname === '/' && !trending) {
-                return inputVal ? !item.isTrending && item.title.toLowerCase().includes(inputVal.toLowerCase()) : !item.isTrending;
+                return !item.isTrending;
             } else if (pathname === '/movies') {
                 return item.category === 'Movie';
             } else if (pathname === '/tv-series') {
@@ -29,7 +29,7 @@ const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
         });
 
         setFilteredMedia(newMedia);
-    }, [media, trending, bookmarkedMovie, bookmarkedTVSeries, pathname, inputVal]);
+    }, [media, trending, bookmarkedMovie, bookmarkedTVSeries, pathname]);
 
     useEffect(() => {
         handleFilteredMedia();
@@ -38,18 +38,26 @@ const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
     return (
         <SectionStyles>
             <SectionTitle>
-                {searchResult.length > 0
-                    ? `Found ${searchResult.length} result${searchResult.length > 1 ? 's' : ''} for ‘${inputVal}’`
+                {searchedItems.length > 0
+                    ? `Found ${searchedItems.length} result${searchedItems.length > 1 ? 's' : ''} for ‘${inputVal}’`
                     : getTitle(pathname, trending, bookmarkedMovie, bookmarkedTVSeries)}
             </SectionTitle>
             <MediaWrapper>
-                {filteredMedia.map((item) => {
-                    return (
-                        <MediaItem key={item.title}>
-                            <Thumbnail handleBookmarks={handleBookmarks} item={item} />
-                        </MediaItem>
-                    );
-                })}
+                {searchedItems.length > 0
+                    ? searchedItems.map((item) => {
+                          return (
+                              <MediaItem key={item.title}>
+                                  <Thumbnail handleBookmarks={handleBookmarks} item={item} />
+                              </MediaItem>
+                          );
+                      })
+                    : filteredMedia.map((item) => {
+                          return (
+                              <MediaItem key={item.title}>
+                                  <Thumbnail handleBookmarks={handleBookmarks} item={item} />
+                              </MediaItem>
+                          );
+                      })}
             </MediaWrapper>
         </SectionStyles>
     );
@@ -57,7 +65,8 @@ const Section = ({ trending, bookmarkedMovie, bookmarkedTVSeries }) => {
 
 Section.propTypes = {
     trending: PropTypes.bool,
-    title: PropTypes.string.isRequired,
+    bookmarkedMovie: PropTypes.bool,
+    bookmarkedTVSeries: PropTypes.bool,
 };
 
 export default Section;

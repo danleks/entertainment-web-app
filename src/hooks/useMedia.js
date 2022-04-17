@@ -2,11 +2,11 @@ import axios from 'axios';
 import { useCallback } from 'react';
 
 export const useMedia = () => {
-    const getMedia = useCallback(async (item = null, searchResult) => {
+    const getMedia = useCallback(async (item = null, searchedItems) => {
         try {
             const { data } = await axios.post('/media', {
                 item,
-                searchResult,
+                searchedItems,
             });
             return data.media;
         } catch (e) {

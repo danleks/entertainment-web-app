@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Wrapper, InputStyles, SearchIconStyles, ResultsWrapper, ResultsList, ResultsItem } from './SearchBar.styles';
 import { useCombobox } from 'downshift';
 import { useLocation } from 'react-router-dom';
@@ -6,31 +6,43 @@ import { AppContext } from 'providers/AppProvider';
 import { getPlaceholderText } from 'helpers/getPlaceholderText';
 
 const SearchBar = () => {
+    const [searchListIsVisible, setSearchListIsVisible] = useState(true);
+    const { searchList, handleInpuValueChange, handleSelectedItemChange, handleFormSubmit } = useContext(AppContext);
     const { pathname } = useLocation();
-    const { searchResult, handleMediaSearch, handleFormSubmit } = useContext(AppContext);
+
+    const formSubmit = (e) => {
+        handleFormSubmit(e);
+        setSearchListIsVisible(false);
+    };
+
     const { isOpen, getMenuProps, getInputProps, getComboboxProps, highlightedIndex, getItemProps } = useCombobox({
-        items: searchResult,
+        items: searchList,
         itemToString: (item) => (item ? item.title : ''),
-        onInputValueChange: ({ inputValue }) => handleMediaSearch(inputValue),
-        onSelectedItemChange: ({ inputValue }) => handleMediaSearch(inputValue),
+        onInputValueChange: ({ inputValue }) => {
+            handleInpuValueChange(inputValue);
+            setSearchListIsVisible(true);
+        },
+        onSelectedItemChange: ({ inputValue }) => handleSelectedItemChange(inputValue),
     });
 
     return (
-        <Wrapper {...getComboboxProps()} onSubmit={(e) => handleFormSubmit(e)}>
+        <Wrapper {...getComboboxProps()} onSubmit={formSubmit}>
             <SearchIconStyles />
             <InputStyles {...getInputProps()} placeholder={getPlaceholderText(pathname)} />
-            <ResultsWrapper isVisible={isOpen && searchResult.length}>
+            <ResultsWrapper isVisible={isOpen && searchListIsVisible && searchList.length > 0}>
                 <h2>Search {pathname === '/' ? 'movies or tv-series' : pathname.split('/')}</h2>
                 <ResultsList {...getMenuProps()}>
                     {isOpen &&
-                        searchResult.map((item, index) => {
+                        searchListIsVisible &&
+                        searchList.map((item, index) => {
                             return (
                                 <ResultsItem
                                     isHighlighted={highlightedIndex === index}
                                     {...getItemProps({ item, index })}
                                     key={`${item.title}${index}`}
                                 >
-                                    {item.title}
+                                    <span>{item.title}</span>
+                                    <span>{item.category}</span>
                                 </ResultsItem>
                             );
                         })}
